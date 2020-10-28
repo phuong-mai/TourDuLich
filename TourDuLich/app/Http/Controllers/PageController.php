@@ -8,6 +8,6 @@ use App\Http\Controllers\Controller;
 class PageController extends Controller
 {
     public function getIndex() {
-        return view('master');
+        return view('pages.index');
     }
 }
