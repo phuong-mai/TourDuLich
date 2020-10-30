@@ -1,7 +1,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
         <div class="sidebar-brand-text mx-3">Tour Travel</div>
       </a>
 
@@ -10,7 +10,7 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item active">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
       </li>
@@ -26,25 +26,25 @@
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="dat-tour.html">Đặt Tour</a>
-            <a class="collapse-item" href="quan-ly-tour.html">Quản Lý Tour</a>
-            <a class="collapse-item" href="doan-khach.html">Đoàn Khách</a>
-            <a class="collapse-item" href="chi-phi.html">Chi Phí Tour</a>
-            <a class="collapse-item" href="gia-tour.html">Giá Tour</a>
+            <a class="collapse-item" href="{{ url('booktour') }}">Đặt Tour</a>
+            <a class="collapse-item" href="{{ url('tour') }}">Quản Lý Tour</a>
+            <a class="collapse-item" href="{{ url('group') }}">Đoàn Khách</a>
+            <a class="collapse-item" href="{{ url('cost') }}">Chi Phí Tour</a>
+            <a class="collapse-item" href="{{ url('price') }}">Giá Tour</a>
           </div>
         </div>
       </li>
 
       <!-- Nav Item - Utilities Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link" href="khach-hang.html">
+        <a class="nav-link" href="{{ url('customer') }}">
           <i class="fas fa-fw fa-users"></i>
           <span>Khách Hàng</span>
         </a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="nhan-vien.html">
+        <a class="nav-link" href="{{ url('staff') }}">
           <i class="fas fa-fw fa-user"></i>
           <span>Nhân Viên</span>
         </a>
