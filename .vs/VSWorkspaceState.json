@@ -2,14 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\TourDuLich",
-    "\\TourDuLich\\app",
-    "\\TourDuLich\\app\\Http",
-    "\\TourDuLich\\app\\Http\\Controllers",
-    "\\TourDuLich\\database\\migrations",
-    "\\TourDuLich\\public",
     "\\TourDuLich\\public\\source",
     "\\TourDuLich\\resources"
   ],
-  "SelectedNode": "\\TourDuLich\\public\\source\\index.html",
+  "SelectedNode": "\\TourDuLich\\.env.example",
   "PreviewInSolutionExplorer": false
 }
