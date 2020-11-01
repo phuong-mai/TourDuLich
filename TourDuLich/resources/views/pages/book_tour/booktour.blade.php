@@ -88,8 +88,9 @@
                     </tr>
                   </thead>
                   <tbody>
+                  @foreach($tour_group as $i)
                     <tr>
-                      <td>Sài Gòn - Hà Nội</td>
+                      <td>{{$i->id}}</td>
                       <td>Du lịch di động</td>
                       <td>Đoàn quân Việt Nam đi</td>
                       <td>25/10/2020</td>
