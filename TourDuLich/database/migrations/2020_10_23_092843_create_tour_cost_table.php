@@ -14,10 +14,13 @@ class CreateTourCostTable extends Migration
     public function up()
     {
         Schema::create('tour_cost', function (Blueprint $table) {
-            $table->increments('id')->nullable();
-            $table->integer('group_id')->nullable();
-            $table->integer('cost_total')->nullable();
-            $table->string('description')->nullable();
+            $table->increments('id');
+            $table->integer('group_id');
+            $table->integer('cost_hotel');
+            $table->integer('cost_food');
+            $table->integer('cost_vehicle');
+            $table->integer('cost_another');
+            $table->string('description');
             $table->timestamps();
             $table->softDeletes();
         });

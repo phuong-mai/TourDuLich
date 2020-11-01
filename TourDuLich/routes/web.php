@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\DB;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -40,6 +40,10 @@ Route::get('/group',[
 Route::get('/cost',[
     'as'=>'cost',
     'uses'=>'CostController@index'
+]);
+Route::get('destroy_cost/{id}',[
+    'as'=>'destroy_cost',
+    'uses'=>'CostController@destroy'
 ]);
 
 Route::get('/price',[
