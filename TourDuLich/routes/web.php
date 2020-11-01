@@ -56,3 +56,21 @@ Route::get('/staff',[
     'as'=>'staff',
     'uses'=>'StaffController@index'
 ]);
+
+Route::get('/login',[
+    'as'=>'login',
+    'uses'=>'LoginController@getlogin'
+]);
+
+Route::post('/login',[
+    'as'=>'login',
+    'uses'=>'LoginController@postlogin'
+]);
+Route::get('/register',[
+    'as'=>'register',
+    'uses'=>'LoginController@getregister'
+]);
+Route::post('/register',[
+    'as'=>'register',
+    'uses'=>'LoginController@postregister'
+]);
