@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Cost;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class CostController extends Controller
@@ -12,7 +13,8 @@ class CostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        return view('pages.cost');
+        $costs = Cost::all();
+        return view('pages.Cost.cost',compact('costs'));
     }
 
     /**
@@ -22,7 +24,7 @@ class CostController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -33,7 +35,7 @@ class CostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -76,8 +78,9 @@ class CostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $deleted = Cost::where('id',$request->id)->delete();
+        return redirect()->back();
     }
 }
