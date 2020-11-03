@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Tour;
 use Illuminate\Http\Request;
 
 class TourController extends Controller
@@ -12,7 +12,8 @@ class TourController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        return view('pages.tour');
+        $tour = tour::all();
+        return view('pages.Tour.tour',compact('tour'));
     }
 
     /**
