@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class TourGroup extends Model
+class Group extends Model
 {
     use Notifiable;
 
