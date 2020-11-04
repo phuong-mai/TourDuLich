@@ -11,7 +11,7 @@ use Illuminate\Validation\Rule;
 class TourPriceController extends Controller
 {
     public function index() {
-        $prices = DB::table('tour_price')->join('tours', 'tour_price.id_tour', '=', 'tours.id')->get();;
+        $prices = DB::table('tour_price')->join('tours', 'tour_price.id_tour', '=', 'tours.id')->get();
         //dd($prices);
         return view('pages.price.price', ['prices' => $prices]);
     }
@@ -21,8 +21,9 @@ class TourPriceController extends Controller
     }
 
     public function onedit($id) {
-        $prices = DB::select('select * from tour_price where id = ?',[$id]);
-        return view('pages.price.price_update',['prices'=>$prices]);
+        $prices = DB::table('tour_price')->join('tours', 'tour_price.id_tour', '=', 'tours.id')->where('tour_price.id',$id)->get();
+        $tours = DB::table('tours')->get();
+        return view('pages.price.price_update',['prices'=>$prices,'tours'=>$tours]);
     }
 
     public function PriceCreate(Request $request){
@@ -31,14 +32,14 @@ class TourPriceController extends Controller
 			try{
 				$price = new TourPrice;
                 $price->price = $data['price'];
-				$price->id_tour = "1";
+				$price->id_tour = $data['id_tour'];
                 $price->start_day = $data['start_day'];
                 $price->end_day = $data['end_day'];
                 $price->save();
-				return redirect('price')->with('status',"Insert successfully");
+				return redirect('TourPrice')->with('status',"Insert successfully");
 			}
 			catch(Exception $e){
-				return redirect('price')->with('failed',"operation failed");
+				return redirect('TourPrice')->with('failed',"operation failed");
 			}
     }
     public function PriceEdit(Request $request,$id) {
@@ -46,15 +47,15 @@ class TourPriceController extends Controller
 			try{
                 $price = new TourPrice;
                 $price->price = $data['price'];
-				$price->id_tour = "1";
+				$price->id_tour = $data['id_tour'];
                 $price->start_day = $data['start_day'];
                 $price->end_day = $data['end_day'];
                 DB::update('update tour_price set price = ?,id_tour=?,start_day=?,end_day=? where id = ?'
                 ,[$price->price,$price->id_tour,$price->start_day,$price->end_day,$id]);
-                return redirect('price')->with('status',"Update successfully");
+                return redirect('TourPrice')->with('status',"Update successfully");
 			}
 			catch(Exception $e){
-				return redirect('price')->with('failed',"operation failed");
+				return redirect('TourPrice')->with('failed',"operation failed");
             }
         }
 

@@ -11,15 +11,16 @@
                 @csrf
                 <div class="form-group">
                     <label for="id_tour">Tour</label>
-                    <select id="id_tour" name="id_tour" class="form-control">
+                    <select id="id_tour" name="id_tour" class="form-control" aria-placeholder="Select">
+                        <option value="" disabled selected hidden>Chọn tour du lịch muốn thêm giá</option>
                         @foreach($tours as $tour)
                         <option >{{$tour->tour_name}}</option>
                         @endforeach
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="price">Giá tour</label>
-                    <input type="text" class="form-control" name="price" id="price">
+                    <label for="price" >Giá tour</label>
+                    <input type="text" placeholder="Nhập giá tour" class="form-control" name="price" id="price">
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">

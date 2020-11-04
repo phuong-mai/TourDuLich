@@ -13,8 +13,9 @@
                 <div class="form-group">
                     <label for="id_tour">Tour</label>
                     <select id="id_tour" name="id_tour" class="form-control">
-                        <option selected>{{ $price-> id_tour }}</option>
-                        <option>Sài Gòn - Hà Nội</option>
+                        @foreach($tours as $tour)
+                        <option value="{{$tour->id}}" {{($price->tour_name === $tour->tour_name) ? 'Selected' : ''}} >{{$tour->tour_name}}</option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="form-group">
