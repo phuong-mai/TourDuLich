@@ -10,11 +10,11 @@
             <form action="TourPrice/create" method="post">
                 @csrf
                 <div class="form-group">
-                    <label for="id_tour">Tour</label>
-                    <select id="id_tour" name="id_tour" class="form-control" aria-placeholder="Select">
+                    <label for="tour_id">Tour</label>
+                    <select id="tour_id" name="tour_id" class="form-control" aria-placeholder="Select">
                         <option value="" disabled selected hidden>Chọn tour du lịch muốn thêm giá</option>
                         @foreach($tours as $tour)
-                        <option >{{$tour->tour_name}}</option>
+                        <option value="{{$tour->tour_id}}"  >{{$tour->tour_name}}</option>
                         @endforeach
                     </select>
                 </div>

@@ -89,13 +89,13 @@
                     <tbody>
                         @foreach($prices as $price)
                         <tr>
-                            <td>{{ $price-> id }}</td>
+                            <td>{{ $price-> tour_id }}</td>
                             <td>{{ $price-> tour_name }}</td>
-                            <td>{{ number_format( $price-> price , 0) }}</td>
-                            <td>{{ date_format(new DateTime($price->start_day), 'd-m-Y ') }}</td>
-                            <td>{{ date_format(new DateTime($price->end_day), 'd-m-Y ') }}</td>
+                            <td>{{ number_format( $price-> price_value , 0) }}</td>
+                            <td>{{ date_format(new DateTime($price->price_start_date), 'd-m-Y ') }}</td>
+                            <td>{{ date_format(new DateTime($price->price_end_date), 'd-m-Y ') }}</td>
                             <td>
-                                <a class="btn btn-success btn-sm" href = 'TourPrice/edit/{{ $price->id }}'>Sửa</a>
+                                <a class="btn btn-success btn-sm" href = 'TourPrice/edit/{{ $price->tour_id }}'>Sửa</a>
                                 <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
                                     data-target="#exampleModal2" data-whatever="@getbootstrap">Xóa</button>
 

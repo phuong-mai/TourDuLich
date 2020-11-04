@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class TourPrice extends Model
 {
-    protected $table = 'tour_price';
+    protected $table = 'price';
 	public $timestamps = true;
 	/**
 	 * The attributes that are mass assignable.
@@ -14,6 +14,6 @@ class TourPrice extends Model
 	 * @var array
 	 */
 	protected $fillable = [
-		'id', 'price','id_tour', 'start_day','end_day',
+		'price_id', 'price_value','tour_id', 'price_start_date','price_end_date',
 	];
 }

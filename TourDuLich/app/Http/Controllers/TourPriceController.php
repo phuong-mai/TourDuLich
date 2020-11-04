@@ -11,18 +11,18 @@ use Illuminate\Validation\Rule;
 class TourPriceController extends Controller
 {
     public function index() {
-        $prices = DB::table('tour_price')->join('tours', 'tour_price.id_tour', '=', 'tours.id')->get();
+        $prices = DB::table('price')->join('tour', 'price.tour_id', '=', 'tour.tour_id')->get();
         //dd($prices);
         return view('pages.price.price', ['prices' => $prices]);
     }
     public function oncreate() {
-        $tours = DB::table('tours')->get();
+        $tours = DB::table('tour')->get();
         return view('pages.price.price_create',['tours' => $tours]);
     }
 
     public function onedit($id) {
-        $prices = DB::table('tour_price')->join('tours', 'tour_price.id_tour', '=', 'tours.id')->where('tour_price.id',$id)->get();
-        $tours = DB::table('tours')->get();
+        $prices = DB::table('price')->join('tour', 'price.tour_id', '=', 'tour.tour_id')->where('price.price_id',$id)->get();
+        $tours = DB::table('tour')->get();
         return view('pages.price.price_update',['prices'=>$prices,'tours'=>$tours]);
     }
 
@@ -31,10 +31,10 @@ class TourPriceController extends Controller
             $data = $request->input();
 			try{
 				$price = new TourPrice;
-                $price->price = $data['price'];
-				$price->id_tour = $data['id_tour'];
-                $price->start_day = $data['start_day'];
-                $price->end_day = $data['end_day'];
+                $price->price_value = $data['price'];
+				$price->tour_id = $data['tour_id'];
+                $price->price_start_date = $data['start_day'];
+                $price->price_end_date = $data['end_day'];
                 $price->save();
 				return redirect('TourPrice')->with('status',"Insert successfully");
 			}
@@ -46,12 +46,12 @@ class TourPriceController extends Controller
         $data = $request->input();
 			try{
                 $price = new TourPrice;
-                $price->price = $data['price'];
-				$price->id_tour = $data['id_tour'];
-                $price->start_day = $data['start_day'];
-                $price->end_day = $data['end_day'];
-                DB::update('update tour_price set price = ?,id_tour=?,start_day=?,end_day=? where id = ?'
-                ,[$price->price,$price->id_tour,$price->start_day,$price->end_day,$id]);
+                $price->price_value = $data['price'];
+				$price->tour_id = $data['tour_id'];
+                $price->price_start_date = $data['start_day'];
+                $price->price_end_date = $data['end_day'];
+                DB::update('update price set price_value = ?,tour_id=?,price_start_date=?,price_end_date=? where price_id = ?'
+                ,[$price->price_value,$price->tour_id,$price->price_start_date,$price->price_end_date,$id]);
                 return redirect('TourPrice')->with('status',"Update successfully");
 			}
 			catch(Exception $e){
