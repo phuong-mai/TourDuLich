@@ -37,6 +37,19 @@ Route::get('/group',[
     'uses'=>'GroupController@index'
 ]);
 
+Route::get('/group/create',[
+    'as'=>'group',
+    'uses'=>'GroupController@create'
+]);
+Route::post('group/create','GroupController@store');
+Route::get('/group/edit/{id}',[
+    'as'=>'group',
+    'uses'=>'GroupController@edit'
+]);
+Route::post('/group/edit/{id}',[
+    'as'=>'group',
+    'uses'=>'GroupController@update'
+]);
 Route::get('/cost',[
     'as'=>'cost',
     'uses'=>'CostController@index'
