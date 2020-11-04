@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use DB;
-use App\TourPrice;
+use App\Price;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
@@ -30,7 +30,7 @@ class TourPriceController extends Controller
 
             $data = $request->input();
 			try{
-				$price = new TourPrice;
+				$price = new Price;
                 $price->price_value = $data['price'];
 				$price->tour_id = $data['tour_id'];
                 $price->price_start_date = $data['start_day'];
@@ -45,7 +45,7 @@ class TourPriceController extends Controller
     public function PriceEdit(Request $request,$id) {
         $data = $request->input();
 			try{
-                $price = new TourPrice;
+                $price = new Price;
                 $price->price_value = $data['price'];
 				$price->tour_id = $data['tour_id'];
                 $price->price_start_date = $data['start_day'];

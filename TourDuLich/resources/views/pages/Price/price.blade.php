@@ -95,7 +95,7 @@
                             <td>{{ date_format(new DateTime($price->price_start_date), 'd-m-Y ') }}</td>
                             <td>{{ date_format(new DateTime($price->price_end_date), 'd-m-Y ') }}</td>
                             <td>
-                                <a class="btn btn-success btn-sm" href = 'TourPrice/edit/{{ $price->tour_id }}'>Sửa</a>
+                                <a class="btn btn-success btn-sm" href = 'TourPrice/edit/{{ $price->price_id }}'>Sửa</a>
                                 <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
                                     data-target="#exampleModal2" data-whatever="@getbootstrap">Xóa</button>
 
