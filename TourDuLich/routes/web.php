@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\DB;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,6 +41,10 @@ Route::get('/cost',[
     'as'=>'cost',
     'uses'=>'CostController@index'
 ]);
+Route::get('destroy_cost/{id}',[
+    'as'=>'destroy_cost',
+    'uses'=>'CostController@destroy'
+]);
 
 Route::get('/customer',[
     'as'=>'customer',
@@ -52,7 +56,23 @@ Route::get('/staff',[
     'uses'=>'StaffController@index'
 ]);
 
+Route::get('/login',[
+    'as'=>'login',
+    'uses'=>'LoginController@getlogin'
+]);
 
+Route::post('/login',[
+    'as'=>'login',
+    'uses'=>'LoginController@postlogin'
+]);
+Route::get('/register',[
+    'as'=>'register',
+    'uses'=>'LoginController@getregister'
+]);
+Route::post('/register',[
+    'as'=>'register',
+    'uses'=>'LoginController@postregister'
+]);
 
 Route::get('/TourPrice',[
     'as'=>'tourprice',

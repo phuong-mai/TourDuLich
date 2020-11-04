@@ -13,16 +13,16 @@ class TourPriceController extends Controller
     public function index() {
         $prices = DB::table('tour_price')->join('tours', 'tour_price.id_tour', '=', 'tours.id')->get();;
         //dd($prices);
-        return view('pages.price.TourPrice', ['prices' => $prices]);
+        return view('pages.price.price', ['prices' => $prices]);
     }
     public function oncreate() {
         $tours = DB::table('tours')->get();
-        return view('pages.price.AddPrice',['tours' => $tours]);
+        return view('pages.price.price_create',['tours' => $tours]);
     }
 
     public function onedit($id) {
         $prices = DB::select('select * from tour_price where id = ?',[$id]);
-        return view('pages.price.EditPrice',['prices'=>$prices]);
+        return view('pages.price.price_update',['prices'=>$prices]);
     }
 
     public function PriceCreate(Request $request){
@@ -35,7 +35,7 @@ class TourPriceController extends Controller
                 $price->start_day = $data['start_day'];
                 $price->end_day = $data['end_day'];
                 $price->save();
-				return redirect('TourPrice')->with('status',"Insert successfully");
+				return redirect('price')->with('status',"Insert successfully");
 			}
 			catch(Exception $e){
 				return redirect('price')->with('failed',"operation failed");
@@ -51,7 +51,7 @@ class TourPriceController extends Controller
                 $price->end_day = $data['end_day'];
                 DB::update('update tour_price set price = ?,id_tour=?,start_day=?,end_day=? where id = ?'
                 ,[$price->price,$price->id_tour,$price->start_day,$price->end_day,$id]);
-                return redirect('TourPrice')->with('status',"Update successfully");
+                return redirect('price')->with('status',"Update successfully");
 			}
 			catch(Exception $e){
 				return redirect('price')->with('failed',"operation failed");
