@@ -37,6 +37,11 @@ Route::get('/group',[
     'uses'=>'GroupController@index'
 ]);
 
+Route::get('/group/create',[
+    'as'=>'group',
+    'uses'=>'GroupController@create'
+]);
+
 Route::get('/cost',[
     'as'=>'cost',
     'uses'=>'CostController@index'
