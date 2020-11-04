@@ -74,21 +74,18 @@ Route::post('/register',[
     'uses'=>'LoginController@postregister'
 ]);
 
-Route::get('/TourPrice',[
-    'as'=>'tourprice',
-    'uses'=>'TourPriceController@index'
+Route::get('/price',[
+    'uses'=>'PriceController@index'
 ]);
 
-Route::get('TourPrice/create','TourPriceController@oncreate');
+Route::get('price/create','PriceController@oncreate');
 
-Route::post('TourPrice/create','TourPriceController@PriceCreate');
+Route::post('price/create','PriceController@PriceCreate');
 
-Route::get('/TourPrice/edit/{id}',[
-    'as'=>'tourprice',
-    'uses'=>'TourPriceController@onedit'
+Route::get('/price/edit/{id}',[
+    'uses'=>'PriceController@onedit'
 ]);
 
-Route::post('/TourPrice/edit/{id}',[
-    'as'=>'tourprice',
-    'uses'=>'TourPriceController@PriceEdit'
+Route::post('/price/edit/{id}',[
+    'uses'=>'PriceController@PriceEdit'
 ]);

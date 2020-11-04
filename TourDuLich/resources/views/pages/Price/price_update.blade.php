@@ -8,7 +8,7 @@
             <h5 class="modal-title" id="exampleModalLabel">Sửa Giá Tour</h5>
         </div>
         <div class="modal-body">
-            <form action="TourPrice/edit/{{ $price->price_id }}" method="post">
+            <form action="price/edit/{{ $price->price_id }}" method="post">
                 @csrf
                 <div class="form-group">
                     <label for="tour_id">Tour</label>
@@ -25,7 +25,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="start_day">Từ ngày</label>
-                        <input type="date" class="form-control" name="start_day" id="start_day" value="{{ date_format(new DateTime($price->price_start_date), 'Y-m-d') }}">
+                        <input type="date" class="form-control" name="start_day" id="start_day" value="{{ $price->price_start_date}}">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="end_day">Đến ngày</label>
@@ -33,7 +33,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <a type="button" class="btn btn-secondary btn-sm" href="{{ url('TourPrice') }}">Hủy</a>
+                    <a type="button" class="btn btn-secondary btn-sm" href="{{ url('price') }}">Hủy</a>
                     <button type="submit" class="btn btn-primary btn-sm">Xác nhận Sửa</button>
                 </div>
             </form>
