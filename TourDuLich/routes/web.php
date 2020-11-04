@@ -42,11 +42,6 @@ Route::get('/cost',[
     'uses'=>'CostController@index'
 ]);
 
-Route::get('/price',[
-    'as'=>'price',
-    'uses'=>'PriceController@index'
-]);
-
 Route::get('/customer',[
     'as'=>'customer',
     'uses'=>'CustomerController@index'
@@ -55,4 +50,25 @@ Route::get('/customer',[
 Route::get('/staff',[
     'as'=>'staff',
     'uses'=>'StaffController@index'
+]);
+
+
+
+Route::get('/TourPrice',[
+    'as'=>'tourprice',
+    'uses'=>'TourPriceController@index'
+]);
+
+Route::get('TourPrice/create','TourPriceController@oncreate');
+
+Route::post('TourPrice/create','TourPriceController@PriceCreate');
+
+Route::get('/TourPrice/edit/{id}',[
+    'as'=>'tourprice',
+    'uses'=>'TourPriceController@onedit'
+]);
+
+Route::post('/TourPrice/edit/{id}',[
+    'as'=>'tourprice',
+    'uses'=>'TourPriceController@PriceEdit'
 ]);

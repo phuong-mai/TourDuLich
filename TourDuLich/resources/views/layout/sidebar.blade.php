@@ -30,7 +30,7 @@
             <a class="collapse-item" href="{{ url('tour') }}">Quản Lý Tour</a>
             <a class="collapse-item" href="{{ url('group') }}">Đoàn Khách</a>
             <a class="collapse-item" href="{{ url('cost') }}">Chi Phí Tour</a>
-            <a class="collapse-item" href="{{ url('price') }}">Giá Tour</a>
+            <a class="collapse-item" href="{{ url('TourPrice') }}">Giá Tour</a>
           </div>
         </div>
       </li>
