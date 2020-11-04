@@ -33,7 +33,7 @@
             <a class="collapse-item" href="{{ url('price') }}">Giá Tour</a>
           </div>
         </div>
-      </li>
+      </li>git
 
       <!-- Nav Item - Utilities Collapse Menu -->
       <li class="nav-item">
