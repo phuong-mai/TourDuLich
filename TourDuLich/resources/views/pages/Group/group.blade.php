@@ -2,6 +2,17 @@
 @section('content')
 
 <div class="container-fluid">
+    @if (session('status'))
+    <div class="alert alert-success" role="alert">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
+        {{ session('status') }}
+    </div>
+    @elseif(session('failed'))
+    <div class="alert alert-danger" role="alert">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
+        {{ session('failed') }}
+    </div>
+    @endif
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
@@ -10,7 +21,7 @@
                   <h5 class="font-weight-bold text-primary">Đoàn Khách</h5>
                 </div>
                 <div class="col-auto">
-                <a type="button" class="btn btn-primary btn-sm" href="{{ url('group/create')}}">Thêm</a>
+                <a type="button" class="btn btn-primary btn-sm" href="{{ url('group/create') }}">Thêm</a>
                 </div>
               </div>
             </div>
@@ -27,68 +38,14 @@
                     </tr>
                   </thead>
                   <tbody>
+                    @foreach($groups as $group)
                     <tr>
-                      <td>Sài Gòn - Hà Nội</td>
-                      <td>Đoàn quân Việt Nam đi</td>
-                      <td>25/10/2020</td>
-                      <td>30/10/2020</td>
+                      <td>{{$group->tour_id}}</td>
+                      <td>{{$group->group_name}}</td>
+                      <td>{{ date_format(new DateTime($group->group_start_date), 'd-m-Y')}}</td>
+                      <td>{{ date_format(new DateTime($group->group_end_date), 'd-m-Y')}}</td>
                       <td>
-                        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#exampleModal1"
-                          data-whatever="@getbootstrap">Sửa</button>
-                        <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel1"
-                          aria-hidden="true">
-                          <div class="modal-dialog">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Sửa Đoàn Khách</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                  <span aria-hidden="true">&times;</span>
-                                </button>
-                              </div>
-                              <div class="modal-body">
-                                <form>
-                                  <div class="form-group">
-                                    <label for="inputTour">Tour</label>
-                                    <select id="inputTour" class="form-control">
-                                      <option selected>Chọn tour</option>
-                                      <option>Sài Gòn - Hà Nội</option>
-                                    </select>
-                                  </div>
-                                  <div class="form-group">
-                                    <label for="inputGroup">Tên đoàn khách</label>
-                                    <input type="text" class="form-control" id="inputGroup">
-                                  </div>
-                                  <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                      <label for="inputStart">Ngày đi</label>
-                                      <input type="date" class="form-control" id="inputStart">
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                      <label for="inputEnd">Ngày đến</label>
-                                      <input type="date" class="form-control" id="inputEnd">
-                                    </div>
-                                  </div>                          
-                                  <div class="form-group">
-                                    <label for="inputListCustomer">Danh sách khách</label>
-                                    <input type="text" class="form-control" id="inputListCustomer">
-                                  </div>
-                                  <div class="form-group">
-                                    <label for="inputListEmployee">Danh sách nhân viên</label>
-                                    <input type="text" class="form-control" id="inputListEmployee">
-                                  </div>
-                                  <div class="form-group">
-                                    <label for="inputDetail">Chi tiết chương trình</label>
-                                    <input type="text" class="form-control" id="inputDetail">
-                                  </div>
-                                </form>
-                              </div>
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Hủy</button>
-                                <button type="button" class="btn btn-success btn-sm">Xác nhận sửa</button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+                        <a type="button" class="btn btn-success btn-sm" href="group/edit/{{$group->group_id}}">Sửa</a>
                         <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal2"
                           data-whatever="@getbootstrap">Xóa</button>
                         <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2"
@@ -108,13 +65,17 @@
                               </div>
                               <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Hủy</button>
-                                <button type="button" class="btn btn-danger btn-sm">Xác nhận xóa</button>
+                                <button type="submit" class="btn btn-danger btn-sm">Xác nhận xóa</button>
                               </div>
                             </div>
                           </div>
+                        
+                        
+                        
                         </div>
                       </td>
                     </tr>
+                    @endforeach
                   </tbody>
                 </table>
               </div>
