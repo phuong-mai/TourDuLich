@@ -6,15 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Group extends Model
 {
-    use Notifiable;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $table = 'tour_group';
+    protected $table = 'group';
     protected $fillable = [
-        'id', 'tour_id', 'name','from_date','to_date','plan'
+        'group_id', 'tour_id', 'group_name','group_start_date','group_end_date','group_plan'
     ];
 }
