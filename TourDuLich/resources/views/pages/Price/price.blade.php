@@ -128,6 +128,7 @@
                         @endforeach
                     </tbody>
                 </table>
+            <div>{{$prices->links()}}</div>
             </div>
         </div>
     </div>

@@ -12,7 +12,7 @@ use Illuminate\Validation\Rule;
 class PriceController extends Controller
 {
     public function index() {
-        $prices = DB::table('price')->join('tour', 'price.tour_id', '=', 'tour.tour_id')->get();
+        $prices = DB::table('price')->join('tour', 'price.tour_id', '=', 'tour.tour_id')->paginate(10);
         foreach($prices as $price)
         {
             if($price->price_start_date)
