@@ -66,8 +66,8 @@
             </tr>
             </thead>
             <tbody>
+                @foreach($tour as $data_tour)
                 <tr>
-                    @foreach($tour as $data_tour)
                     <td>{{ $data_tour->tour_name }}</td>
                     <td>{{ $data_tour->tour_description }}</td>
                     <td>{{ $data_tour->tour_type }}</td>
@@ -138,8 +138,8 @@
                         </div>
                     </div>
                     </td>
-                    @endforeach
                 </tr>
+                @endforeach
             </tbody>
         </table>
         </div>
