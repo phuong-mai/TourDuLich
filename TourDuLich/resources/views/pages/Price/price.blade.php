@@ -21,7 +21,7 @@
                     <h5 class="font-weight-bold text-primary">Giá Tour</h5>
                 </div>
                 <div class="col-auto">
-                  <a type="button" class="btn btn-primary btn-sm" href="{{ url('TourPrice/create') }}">Add</a>
+                  <a type="button" class="btn btn-primary btn-sm" href="{{ url('price/create') }}">Add</a>
 
                     {{-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                         aria-hidden="true">
@@ -92,10 +92,10 @@
                             <td>{{ $price-> tour_id }}</td>
                             <td>{{ $price-> tour_name }}</td>
                             <td>{{ number_format( $price-> price_value , 0) }}</td>
-                            <td>{{ date_format(new DateTime($price->price_start_date), 'd-m-Y ') }}</td>
-                            <td>{{ date_format(new DateTime($price->price_end_date), 'd-m-Y ') }}</td>
+                            <td>{{ $price->price_start_date}}</td>
+                            <td>{{ $price->price_end_date}}</td>
                             <td>
-                                <a class="btn btn-success btn-sm" href = 'TourPrice/edit/{{ $price->tour_id }}'>Sửa</a>
+                                <a class="btn btn-success btn-sm" href = 'price/edit/{{ $price->price_id }}'>Sửa</a>
                                 <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
                                     data-target="#exampleModal2" data-whatever="@getbootstrap">Xóa</button>
 

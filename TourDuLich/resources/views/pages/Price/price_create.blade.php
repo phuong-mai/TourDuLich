@@ -7,7 +7,7 @@
             <h5 class="modal-title" id="exampleModalLabel">Thêm Giá Tour</h5>
         </div>
         <div class="modal-body">
-            <form action="TourPrice/create" method="post">
+            <form action="price/create" method="post">
                 @csrf
                 <div class="form-group">
                     <label for="tour_id">Tour</label>
@@ -33,7 +33,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <a type="button" class="btn btn-secondary btn-sm" href="{{ url('TourPrice') }}">Hủy</a>
+                    <a type="button" class="btn btn-secondary btn-sm" href="{{ url('price') }}">Hủy</a>
                     <button type="submit" class="btn btn-primary btn-sm">Xác nhận thêm</button>
                 </div>
             </form>
