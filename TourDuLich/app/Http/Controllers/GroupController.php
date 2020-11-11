@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Group;
+use App\Tour;
 use Exception;
 use GuzzleHttp\Psr7\Message;
 use Illuminate\Http\Request;
@@ -20,7 +21,7 @@ class GroupController extends Controller
      */
     public function index()
     {
-        $groups = DB::table('group')->get();
+        $groups = Group::orderBy('group_id','asc')->get();
         return view('pages.group.group',['groups' => $groups]);
     }
 
@@ -43,14 +44,10 @@ class GroupController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->input();
+        
         try {
             $group = new Group();
-            $group->tour_id = $data['tour_id'];
-			$group->group_name = $data['group_name'];
-            $group->group_start_date = $data['group_start_date'];
-            $group->group_end_date = $data['group_end_date'];
-            $group->group_plan = $data['group_plan'];
+            $group->fill($request->all());
             $group->save();
 			return redirect('group')->with('status',"Insert successfully");
         }
@@ -69,6 +66,11 @@ class GroupController extends Controller
     public function show($id)
     {
         //
+        $group = Group::join('tour', 'group.tour_id', '=', 'tour.tour_id')
+                    ->where('group_id',$id)
+                    ->get()
+                    ->first();
+        return view('pages.group.group_detail',['group'=>$group]);
     }
 
     /**
@@ -80,9 +82,10 @@ class GroupController extends Controller
     public function edit($id)
     {
         //
-        $groups = DB::table('group')
-                    ->join('tour', 'group.tour_id', '=', 'tour.tour_id')->where('group_id',$id)->get();
-        $tours = DB::table('tour')->get();
+        $groups = Group::join('tour', 'group.tour_id', '=', 'tour.tour_id')
+                    ->where('group_id',$id)
+                    ->get();
+        $tours = Tour::all();
         return view('pages.group.group_update',['groups'=>$groups,'tours'=>$tours]);
     }
 

@@ -17,7 +17,7 @@ class CostController extends Controller
     public function index() {
         $costs = Cost::join('group as g', 'cost.group_id', '=', 'g.group_id')
         ->select('cost.*', 'g.group_name as group_name')
-        ->paginate();
+        ->paginate(10);
         return view('pages.Cost.cost',compact('costs'));
     }
     /**
