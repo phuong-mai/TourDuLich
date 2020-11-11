@@ -48,7 +48,7 @@
                         <input type="text" class="form-control" id="group_plan" name="group_plan">
                     </div>
                     <div class="modal-footer">
-                        <a type="button" class="btn btn-secondary btn-sm" href="{{ url('group') }}">Hủy</a>
+                        <a type="button" class="btn btn-secondary btn-sm" href="{{ route('group') }}">Hủy</a>
                         <button type="submit" class="btn btn-primary btn-sm">Xác nhận thêm</button>
                     </div>
                 </form>

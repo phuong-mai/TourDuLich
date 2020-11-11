@@ -21,7 +21,7 @@
                         <h5 class="font-weight-bold text-primary">Đoàn Khách</h5>
                     </div>
                     <div class="col-auto">
-                        <a type="button" class="btn btn-primary btn-sm" href="{{ url('group/create') }}">Thêm</a>
+                        <a type="button" class="btn btn-primary btn-sm" href="{{ route('group_create') }}">Thêm</a>
                     </div>
                 </div>
             </div>
@@ -45,8 +45,10 @@
                                     <td>{{ date_format(new DateTime($group->group_start_date), 'd-m-Y') }}</td>
                                     <td>{{ date_format(new DateTime($group->group_end_date), 'd-m-Y') }}</td>
                                     <td>
+                                        <a type="button" class="btn btn-dark btn-sm"
+                                            href="{{ route('group_detail', $group->group_id) }}">Xem</a>
                                         <a type="button" class="btn btn-success btn-sm"
-                                            href="group/edit/{{ $group->group_id }}">Sửa</a>
+                                            href="{{ route('group_update', $group->group_id) }}">Sửa</a>
                                         <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
                                             data-target="#exampleModal2" data-whatever="@getbootstrap">Xóa</button>
                                         <div class="modal fade" id="exampleModal2" tabindex="-1"
@@ -82,6 +84,5 @@
                 </div>
             </div>
         </div>
-
     </div>
 @endsection

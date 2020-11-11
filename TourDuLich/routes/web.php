@@ -38,16 +38,20 @@ Route::get('/group',[
 ]);
 
 Route::get('/group/create',[
-    'as'=>'group',
+    'as'=>'group_create',
     'uses'=>'GroupController@create'
 ]);
 Route::post('group/create','GroupController@store');
 Route::get('/group/edit/{id}',[
-    'as'=>'group',
+    'as'=>'group_edit',
     'uses'=>'GroupController@edit'
 ]);
+Route::get('/group/detail/{id}',[
+    'as'=>'group_detail',
+    'uses'=>'GroupController@show'
+]);
 Route::post('/group/edit/{id}',[
-    'as'=>'group',
+    'as'=>'group_update',
     'uses'=>'GroupController@update'
 ]);
 Route::get('/cost',[
