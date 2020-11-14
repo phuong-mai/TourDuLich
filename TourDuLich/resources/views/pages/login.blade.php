@@ -26,9 +26,9 @@
         <!-- {{ csrf_field() }} -->
             <h3>Login</h3>
             @if( Session::has('tt') )
-                <ul>
-                    <li class="text-danger" alert="{{Session::get('tt')}}"> {{ Session::get('mess') }}</li>
-                </ul>
+             
+                    <div class="alert alert-danger" alert="{{Session::get('tt')}}"> {{ Session::get('mess') }}</div>
+
             @endif
             <div class="form-wrapper">
                 <input type="email" name="email" placeholder="Email" class="form-control">
