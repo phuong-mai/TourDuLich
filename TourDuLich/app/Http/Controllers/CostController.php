@@ -74,12 +74,11 @@ class CostController extends Controller
      */
     public function edit($id)
     {
-        $group = Group::all();
-        $data = Cost::where('cost_id', '=', $id)
-        ->join('group as g', 'cost.group_id', '=', 'g.group_id')
-        ->select('*')
-        ->get();
-        return view('pages.Cost.cost_update', compact('data','group'));
+        $groups = Group::get();
+        $cost = Cost::join('group as g', 'cost.group_id', '=', 'g.group_id')
+        ->where('cost.cost_id', '=', $id)
+        ->first();
+        return view('pages.Cost.cost_update', compact('cost','groups'));
     }
 
     /**
@@ -89,9 +88,19 @@ class CostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-
+        $data = Cost::where('cost_id','=', $request->cost_id)->first();
+        $request['cost_total'] = $request->cost_hotel + $request->cost_food + $request->cost_vehicle + $request->cost_another;
+        $data->fill($request->all());
+        try{
+            $data->save();
+            return redirect('/cost')->with('success','Thêm thành công');
+        }
+        catch(\Exception $e)
+        {
+            return redirect('/cost')->with('fail','Thêm thất bại');
+        }
     }
 
     /**

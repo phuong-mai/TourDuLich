@@ -54,11 +54,12 @@ Route::post('/group/edit/{id}',[
     'as'=>'group_update',
     'uses'=>'GroupController@update'
 ]);
+//cost
 Route::get('/cost',[
     'as'=>'cost',
     'uses'=>'CostController@index'
 ]);
-Route::get('edit_cost/{cost_id}',[
+Route::get('cost/edit_cost/{cost_id}',[
     'as'=>'edit_cost',
     'uses'=>'CostController@edit'
 ]);
@@ -68,7 +69,6 @@ Route::get('destroy_cost/{cost_id}',[
     'as'=>'destroy_cost',
     'uses'=>'CostController@destroy'
 ]);
-
 Route::get('cost/create',[
     'as'=>'create_cost',
     'uses'=>'CostController@create'
@@ -84,6 +84,7 @@ Route::get('destroy_cost/{id}',[
     'as'=>'destroy_cost',
     'uses'=>'CostController@destroy'
 ]);
+//end cost
 //Customer
 Route::get('/customer',[
     'as'=>'customer',
@@ -110,7 +111,6 @@ Route::get('customer/detail_customer/{customer_id}',[
     'as'=>'show_customer',
     'uses'=>'CustomerController@show'
 ]);
-
 Route::get('destroy_customer/{customer_id}',[
     'as'=>'destroy_customer',
     'uses'=>'CustomerController@destroy'

@@ -59,8 +59,7 @@
             </div>
         </div>
         <a class="btn btn-secondary btn-sm" href="{{ route('customer') }}">Hủy</a>
-        <button type="submit" class="btn btn-primary btn-sm">Xác nhận thêm</button> 
-        
+        <button type="submit" class="btn btn-primary btn-sm">Xác nhận thêm</button>  
     </form>
     </div>
   </div>
