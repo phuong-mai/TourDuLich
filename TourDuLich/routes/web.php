@@ -41,7 +41,15 @@ Route::get('/group/create',[
     'as'=>'group_create',
     'uses'=>'GroupController@create'
 ]);
+Route::get('/group/choose-staff/{id}',[
+    'as'=>'choose_staff',
+    'uses'=>'GroupController@chooseStaff'
+]);
 Route::post('group/create','GroupController@store');
+Route::post('participant/update/{id}',[
+    'as'=>'participant_update',
+    'uses'=>'ParticipantController@update'
+]);
 Route::get('/group/edit/{id}',[
     'as'=>'group_edit',
     'uses'=>'GroupController@edit'
@@ -53,6 +61,10 @@ Route::get('/group/detail/{id}',[
 Route::post('/group/edit/{id}',[
     'as'=>'group_update',
     'uses'=>'GroupController@update'
+]);
+Route::get('delete/{id}',[
+    'as'=>'group_delete',
+    'uses'=>'GroupController@destroy'
 ]);
 Route::get('/cost',[
     'as'=>'cost',

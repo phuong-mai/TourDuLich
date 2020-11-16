@@ -7,7 +7,7 @@
                 <div class="card-header py-3">
                     <div class="row justify-content-between">
                         <div class="col-auto">
-                            <h5 class="font-weight-bold text-primary">Thêm chi phí</h5>
+                            <h5 class="font-weight-bold text-primary">Đoàn khách</h5>
                         </div>
                     </div>
                 </div>
@@ -47,7 +47,12 @@
                         </div>
                         <div class="form-group">
                             <label for="inputListEmployee">Danh sách nhân viên</label>
-                            <input type="text" class="form-control" id="inputListEmployee">
+                            <a type="button" class="btn btn-primary btn-sm" href="{{ route('choose_staff',$group->group_id)}}">Chọn nhân viên</a>
+                            <select id="inputListEmployee" class="form-control" size="3">
+                                @foreach ($staffs as $staff)
+                                    <option>{{$staff->staff_name}}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="group_plan">Chi tiết chương trình</label>
@@ -56,7 +61,7 @@
                         </div>
                         <div class="modal-footer">
                             <a type="button" class="btn btn-secondary btn-sm" href="{{ route('group') }}">Hủy</a>
-                            <button type="submit" class="btn btn-success btn-sm">Xác nhận sửa</button>
+                            <button type="submit" class="btn btn-primary btn-sm">Xác nhận</button>
                         </div>
                     </form>
                 </div>
