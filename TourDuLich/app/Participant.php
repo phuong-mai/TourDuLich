@@ -6,6 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Participant extends Model
 {
-    protected $table = "tour_personwalk";
-    protected $fillable = ['id', 'group_id','list_staff', 'list_customer'];
+    protected $table = "participant";
+    protected $fillable = ['participant_id', 'group_id','participant_staff', 'participant_customer'];
 }

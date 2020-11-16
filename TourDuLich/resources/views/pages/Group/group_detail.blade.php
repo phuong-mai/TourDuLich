@@ -29,28 +29,34 @@
                                 <label for="group_start_date">Ngày đi</label>
                                 <label name="group_start_date" class="form-control">
                                     {{date_format(new DateTime($group->group_start_date), 'Y-m-d')}}
-                                <label>
+                                </label>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="group_end_date">Ngày đến</label>
                                 <label name="group_end_date" class="form-control">
                                     {{ date_format(new DateTime($group->group_end_date), 'Y-m-d') }}
-                                <label>
+                                </label>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="inputListCustomer">Danh sách khách</label>
-                            <input type="text" class="form-control" id="inputListCustomer">
+                            <label for="participant_customer">Danh sách khách</label>
+                            <label name="participant_customer" class="form-control">
+                                {{ $group->participant_customer }}
+                            </label>
                         </div>
                         <div class="form-group">
-                            <label for="inputListEmployee">Danh sách nhân viên</label>
-                            <input type="text" class="form-control" id="inputListEmployee">
+                            <label for="participant_staff">Danh sách nhân viên</label>
+                            <select id="participant_staff" class="form-control" size="3">
+                                @foreach ($staffs as $staff)
+                                    <option value="audi">{{$staff->staff_name}}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="group_plan">Chi tiết chương trình</label>
                             <label name="group_plan" class="form-control">
                                 {{ $group->group_plan }}
-                            <label>
+                            </label>
                         </div>
                         <div class="modal-footer">
                             <a type="button" class="btn btn-secondary btn-sm" href="{{ route('group') }}">Hủy</a>

@@ -20,9 +20,12 @@
                     <div class="col-auto">
                         <h5 class="font-weight-bold text-primary">Đoàn Khách</h5>
                     </div>
-                    <div class="col-auto">
-                        <a type="button" class="btn btn-primary btn-sm" href="{{ route('group_create') }}">Thêm</a>
-                    </div>
+                    <form action="group/create" method="POST">
+                        @csrf
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-primary btn-sm"  >Thêm</button>
+                        </div>
+                    </form>
                 </div>
             </div>
             <div class="card-body">
@@ -49,33 +52,9 @@
                                             href="{{ route('group_detail', $group->group_id) }}">Xem</a>
                                         <a type="button" class="btn btn-success btn-sm"
                                             href="{{ route('group_update', $group->group_id) }}">Sửa</a>
-                                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
-                                            data-target="#exampleModal2" data-whatever="@getbootstrap">Xóa</button>
-                                        <div class="modal fade" id="exampleModal2" tabindex="-1"
-                                            aria-labelledby="exampleModalLabel2" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Xóa Đoàn Khách</h5>
-                                                        <button type="button" class="close" data-dismiss="modal"
-                                                            aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <p>
-                                                            Bạn chắc chắn muốn xóa?
-                                                        </p>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary btn-sm"
-                                                            data-dismiss="modal">Hủy</button>
-                                                        <button type="submit" class="btn btn-danger btn-sm">Xác nhận
-                                                            xóa</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <a type="button" class="btn btn-danger btn-sm"
+                                            href="{{ route('group_delete',$group->group_id) }}">Xóa</a>
+                                            
                                     </td>
                                 </tr>
                             @endforeach
