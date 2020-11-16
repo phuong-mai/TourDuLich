@@ -62,15 +62,11 @@ Route::post('/group/edit/{id}',[
     'as'=>'group_update',
     'uses'=>'GroupController@update'
 ]);
-Route::get('delete/{id}',[
-    'as'=>'group_delete',
-    'uses'=>'GroupController@destroy'
-]);
 Route::get('/cost',[
     'as'=>'cost',
     'uses'=>'CostController@index'
 ]);
-Route::get('edit_cost/{cost_id}',[
+Route::get('cost/edit_cost/{cost_id}',[
     'as'=>'edit_cost',
     'uses'=>'CostController@edit'
 ]);
@@ -80,7 +76,6 @@ Route::get('destroy_cost/{cost_id}',[
     'as'=>'destroy_cost',
     'uses'=>'CostController@destroy'
 ]);
-
 Route::get('cost/create',[
     'as'=>'create_cost',
     'uses'=>'CostController@create'
@@ -96,22 +91,75 @@ Route::get('destroy_cost/{id}',[
     'as'=>'destroy_cost',
     'uses'=>'CostController@destroy'
 ]);
-
+//end cost
+//Customer
 Route::get('/customer',[
     'as'=>'customer',
     'uses'=>'CustomerController@index'
 ]);
+Route::get('edit_customer/{customer_id}',[
+    'as'=>'edit_customer',
+    'uses'=>'CustomerController@edit'
+]);
+Route::post('customer/edit_customer/{customer_id}','CustomerController@update');
 
+Route::get('destroy_customer/{customer_id}',[
+    'as'=>'destroy_customer',
+    'uses'=>'CustomerController@destroy'
+]);
+
+Route::get('customer/create',[
+    'as'=>'create_customer',
+    'uses'=>'CustomerController@create'
+]);
+Route::post('customer/create','CustomerController@store');
+
+Route::get('customer/detail_customer/{customer_id}',[
+    'as'=>'show_customer',
+    'uses'=>'CustomerController@show'
+]);
+Route::get('destroy_customer/{customer_id}',[
+    'as'=>'destroy_customer',
+    'uses'=>'CustomerController@destroy'
+]);
+//Staff
 Route::get('/staff',[
     'as'=>'staff',
     'uses'=>'StaffController@index'
 ]);
 
+Route::get('edit_staff/{staff_id}',[
+    'as'=>'edit_staff',
+    'uses'=>'StaffController@edit'
+]);
+Route::post('staff/edit_staff/{staff_id}','StaffController@update');
+
+Route::get('destroy_staff/{staff_id}',[
+    'as'=>'destroy_staff',
+    'uses'=>'StaffController@destroy'
+]);
+
+Route::get('staff/create',[
+    'as'=>'create_staff',
+    'uses'=>'StaffController@create'
+]);
+Route::post('staff/create','StaffController@store');
+
+Route::get('staff/detail_staff/{staff_id}',[
+    'as'=>'show_staff',
+    'uses'=>'StaffController@show'
+]);
+
+Route::get('destroy_staff/{staff_id}',[
+    'as'=>'destroy_staff',
+    'uses'=>'StaffController@destroy'
+]);
+
+//Login
 Route::get('/login',[
     'as'=>'login',
     'uses'=>'LoginController@getlogin'
 ]);
-
 Route::post('/login',[
     'as'=>'login',
     'uses'=>'LoginController@postlogin'

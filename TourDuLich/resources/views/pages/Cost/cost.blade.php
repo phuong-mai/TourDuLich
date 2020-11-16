@@ -19,6 +19,7 @@
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
+                                <th>ID</th>
                                 <th>Đoàn khách</th>
                                 <th>Tổng chi phí</th>
                                 <th>Mô tả</th>
@@ -28,6 +29,7 @@
                         <tbody>
                             @foreach ($costs as $cost)
                                 <tr>
+                                    <td>{{ $cost->cost_id }}</td>
                                     <td>{{ $cost->group_name }}</td>
                                     <td>{{ number_format($cost->cost_total, 0) }}</td>
                                     <td>{{ $cost->cost_detail }}</td>

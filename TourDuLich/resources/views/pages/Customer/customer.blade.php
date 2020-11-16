@@ -7,53 +7,10 @@
     <div class="card-header py-3">
       <div class="row justify-content-between">
         <div class="col-auto">
-          <h5 class="font-weight-bold text-primary">Quản Lý Tour</h5>
+          <h5 class="font-weight-bold text-primary">Khách hàng</h5>
         </div>
         <div class="col-auto">
-          <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal"
-            data-whatever="@getbootstrap">Thêm Tour</button>
-          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Thêm Tour</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <form>
-                    <div class="form-group">
-                      <label for="inputTour">Tour</label>
-                      <input type="text" class="form-control" id="inputTour">
-                    </div>
-                    <div class="form-group">
-                      <label for="inputDescription">Mô tả</label>
-                      <input type="text" class="form-control" id="inputDescription">
-                    </div>
-                    <div class="form-group">
-                      <label for="inputTour">Loại tour</label>
-                      <select id="inputTour" class="form-control">
-                        <option selected>Chọn loại</option>
-                        <option>Du lịch di động</option>
-                        <option>Du lịch kết hợp nghề nghiệp</option>
-                        <option>Du lịch xã hội và gia đình</option>
-                      </select>
-                    </div>
-                    <div class="form-group">
-                      <label for="inputPrice">Giá tour</label>
-                      <input type="text" class="form-control" id="inputPrice">
-                    </div>
-                  </form>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Hủy</button>
-                  <button type="button" class="btn btn-primary btn-sm">Xác nhận thêm</button>
-                </div>
-              </div>
-            </div>
-          </div>
+          <a class="btn btn-primary btn-sm" href="{{route('create_customer')}}">Thêm</a>
         </div>
       </div>
     </div>
@@ -62,92 +19,28 @@
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
           <thead>
             <tr>
-              <th>Tour</th>
+              <th>Đoàn khách</th>
+              <th>Tổng chi phí</th>
               <th>Mô tả</th>
-              <th>Loại tour</th>
-              <th>Giá tour</th>
               <th>Thao tác</th>
             </tr>
           </thead>
           <tbody>
+          @foreach($customers as $i)
             <tr>
-              <td>Sài Gòn - Hà Nội</td>
-              <td>Lorem Ipsum is simply dummy text</td>
-              <td>Du lịch gia đình</td>
-              <td>2.500.000</td>
+              <td>{{ $i->customer_name }}</td>
+              <td>{{$i->customer_email}}</td>
+              <td>{{ $i->customer_phone_number }}</td>
               <td>
-                <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#exampleModal1"
-                  data-whatever="@getbootstrap">Sửa</button>
-                <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel1"
-                  aria-hidden="true">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Sửa Tour</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body">
-                        <form>
-                          <div class="form-group">
-                            <label for="inputTour">Tour</label>
-                            <input type="text" class="form-control" id="inputTour">
-                          </div>
-                          <div class="form-group">
-                            <label for="inputDescription">Mô tả</label>
-                            <input type="text" class="form-control" id="inputDescription">
-                          </div>
-                          <div class="form-group">
-                            <label for="inputTour">Loại tour</label>
-                            <select id="inputTour" class="form-control">
-                              <option selected>Chọn loại</option>
-                              <option>Du lịch di động</option>
-                              <option>Du lịch kết hợp nghề nghiệp</option>
-                              <option>Du lịch xã hội và gia đình</option>
-                            </select>
-                          </div>
-                          <div class="form-group">
-                            <label for="inputPrice">Giá tour</label>
-                            <input type="text" class="form-control" id="inputPrice">
-                          </div>
-                        </form>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Hủy</button>
-                        <button type="button" class="btn btn-success btn-sm">Xác nhận sửa</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal2"
-                  data-whatever="@getbootstrap">Xóa</button>
-                <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2"
-                  aria-hidden="true">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Xóa Tour</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body">
-                        <p>
-                          Bạn chắc chắn muốn xóa?
-                        </p>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Hủy</button>
-                        <button type="button" class="btn btn-danger btn-sm">Xác nhận xóa</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <a class="btn btn-dark btn-sm" href="{{route('show_customer',$i->customer_id)}}">Xem</a>
+                <a class="btn btn-success btn-sm" href="{{route('edit_customer',$i->customer_id)}}">Sửa</a>
+                <a class="btn btn-danger btn-sm" href="{{route('destroy_customer',$i->customer_id)}}" onclick="return confirm('Bạn có chắc sẽ xóa sản phẩm này')" >Xóa</a>
               </td>
             </tr>
+          @endforeach
           </tbody>
         </table>
+        <div>{{ $customers->links() }}</div>
       </div>
     </div>
   </div>
