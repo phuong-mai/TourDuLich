@@ -43,7 +43,6 @@ class ParticipantController extends Controller
         } else {
             $checkbox = '';
         }
-        dd($checkbox);
     }
 
     /**
