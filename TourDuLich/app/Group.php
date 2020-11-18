@@ -15,4 +15,5 @@ class Group extends Model
     protected $fillable = [
         'group_id', 'tour_id', 'group_name','group_start_date','group_end_date','group_plan'
     ];
+    protected $primaryKey = 'group_id';
 }

@@ -6,7 +6,7 @@
                 <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
                 {{ session('status') }}
             </div>
-        @elseif(session('failed'))
+            @elseif(session('failed'))
             <div class="alert alert-danger" role="alert">
                 <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
                 {{ session('failed') }}
@@ -22,7 +22,7 @@
                 </div>
             </div>
             <div class="card-body">
-                <form action="group/edit/{{session('status')}}" method="POST">
+                <form action="group/create" method="POST">
                     @csrf
                     <div class="form-group">
                         <label for="tour_id">Tour</label>
@@ -47,20 +47,11 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputListCustomer">Danh sách khách</label>
-                        <input type="text" class="form-control" id="inputListCustomer" name="inputListCustomer">
-                    </div>
-                    <div class="form-group">
-                        <label for="inputListEmployee">Danh sách nhân viên</label>
-                        <a type="button" class="btn btn-primary btn-sm" href="{{ route('choose_staff',session('status'))}}">Chọn nhân viên</a>
-                        <input type="text" class="form-control" id="inputListEmployee" name="inputListEmployee">
-                    </div>
-                    <div class="form-group">
                         <label for="group_plan">Chi tiết chương trình</label>
-                    <input type="text" class="form-control" id="group_plan" name="group_plan" >
+                        <input type="text" class="form-control" id="group_plan" name="group_plan">
                     </div>
                     <div class="modal-footer">
-                        <a type="button" class="btn btn-secondary btn-sm" href="{{ route('group_delete',session('status')) }}">Hủy</a>
+                        <a type="button" class="btn btn-secondary btn-sm" href="{{ route('group') }}">Hủy</a>
                         <button type="submit" class="btn btn-primary btn-sm">Xác nhận</button>
                     </div>
                 </form>

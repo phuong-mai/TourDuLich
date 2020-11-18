@@ -1,6 +1,6 @@
 @extends('layout.master')
 @section('content')
-    <form action="participant/update/{{$id_group}}" method="POST">
+    <form action="participant/staff/group_{{ $id }}" method="POST">
         @csrf
         <div class="card shadow mb-4">
             <div class="card-header py-3">

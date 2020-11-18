@@ -31,25 +31,16 @@ Route::get('/tour',[
     'as'=>'tour',
     'uses'=>'TourController@index'
 ]);
-
+//group
 Route::get('/group',[
     'as'=>'group',
     'uses'=>'GroupController@index'
 ]);
-
 Route::get('/group/create',[
     'as'=>'group_create',
     'uses'=>'GroupController@create'
 ]);
-Route::get('/group/choose-staff/{id}',[
-    'as'=>'choose_staff',
-    'uses'=>'GroupController@chooseStaff'
-]);
 Route::post('group/create','GroupController@store');
-Route::post('participant/update/{id}',[
-    'as'=>'participant_update',
-    'uses'=>'ParticipantController@update'
-]);
 Route::get('/group/edit/{id}',[
     'as'=>'group_edit',
     'uses'=>'GroupController@edit'
@@ -62,6 +53,36 @@ Route::post('/group/edit/{id}',[
     'as'=>'group_update',
     'uses'=>'GroupController@update'
 ]);
+Route::get('delete/{id}',[
+    'as'=>'group_delete',
+    'uses'=>'GroupController@destroy'
+]);
+Route::get('/participant/staff/group_{id}',[
+    'as'=>'choose_staff',
+    'uses'=>'GroupController@chooseStaff'
+]);
+//participant
+Route::post('/participant/group_{id}',[
+    'as'=>'participant_create',
+    'uses'=>'ParticipantController@store'
+]);
+Route::get('/participant/group_{id}',[
+    'as'=>'participant_edit',
+    'uses'=>'ParticipantController@edit'
+]);
+Route::get('participant/delete/group_{id}',[
+    'as'=>'participant_delete',
+    'uses'=>'ParticipantController@destroy'
+]);
+Route::post('participant/staff/group_{id}',[
+    'as'=>'update_staff',
+    'uses'=>'ParticipantController@update'
+]);
+Route::get('/group/{id}/staff/{staff}',[
+    'as'=>'update_list',
+    'uses'=>'ParticipantController@update_list'
+]);
+//cost
 Route::get('/cost',[
     'as'=>'cost',
     'uses'=>'CostController@index'

@@ -20,10 +20,10 @@
                     <div class="col-auto">
                         <h5 class="font-weight-bold text-primary">Đoàn Khách</h5>
                     </div>
-                    <form action="group/create" method="POST">
+                    <form action="group/create" method="GET">
                         @csrf
                         <div class="col-auto">
-                            <button type="submit" class="btn btn-primary btn-sm"  >Thêm</button>
+                            <button type="submit" class="btn btn-primary btn-sm">Thêm</button>
                         </div>
                     </form>
                 </div>
@@ -51,10 +51,11 @@
                                         <a type="button" class="btn btn-dark btn-sm"
                                             href="{{ route('group_detail', $group->group_id) }}">Xem</a>
                                         <a type="button" class="btn btn-success btn-sm"
-                                            href="{{ route('group_update', $group->group_id) }}">Sửa</a>
+                                            href="{{ route('group_edit', $group->group_id) }}">Sửa</a>
                                         <a type="button" class="btn btn-danger btn-sm"
-                                            href="{{ route('group_delete',$group->group_id) }}">Xóa</a>
-                                            
+                                            href="{{ route('group_delete', $group->group_id) }}">Xóa</a>
+                                        <a type="button" class="btn btn-danger btn-sm"
+                                            href="{{ route('participant_edit', $group->group_id) }}">Participant</a>
                                     </td>
                                 </tr>
                             @endforeach
