@@ -1,8 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
+use DB;
 use App\Tour;
+use App\Type;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
+use Carbon\Carbon;
 
 class TourController extends Controller
 {
@@ -12,8 +18,13 @@ class TourController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $tour = tour::all();
-        return view('pages.Tour.tour',compact('tour'));
+        $current_date = Carbon::now();
+        $tours = DB::table('tour')
+            ->join('type', 'tour.type_id', '=', 'type.type_id')
+            ->join('price', 'tour.tour_id', '=', 'price.tour_id')
+            //->where('price.price_start_date', '>=', $current_date, 'and', '<=', 'price.price_end_date')
+            ->paginate(10);
+        return view('pages.Tour.tour', ['tours' => $tours]);
     }
 
     /**
@@ -23,7 +34,9 @@ class TourController extends Controller
      */
     public function create()
     {
-        //
+        $tours = DB::table('tour')->get();
+        $types = DB::table('type')->get();
+        return view('pages.Tour.tour_create', ['tours' => $tours, 'types' => $types]);
     }
 
     /**
@@ -34,7 +47,19 @@ class TourController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->input();
+        try{
+            $tour = new Tour;
+            $tour->tour_name = $data['tour'];
+            $tour->tour_description = $data['description'];
+            $tour->type_id = $data['type'];
+            $tour->save();
+            return redirect('/tour')->with('status',"Insert successfully");
+        }
+        catch(\Exception $e)
+        {
+            return redirect('/tour')->with('failed',"operation failed");
+        }
     }
 
     /**
@@ -56,7 +81,11 @@ class TourController extends Controller
      */
     public function edit($id)
     {
-        //
+        $tours = DB::table('tour')->get();
+        $types = DB::table('type')->get();
+        return view('pages.Tour.tour_update', ['tours' => $tours, 'types' => $types]);
+        // $tour = Tour::where('tour_id', '=', $id)->first();
+        // return view('pages.Tour.tour_update',compact('tour'));
     }
 
     /**
@@ -68,7 +97,19 @@ class TourController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->input();
+        try{
+            $tour = new Tour();
+            $tour->tour_name = $data['tour'];
+            $tour->tour_description = $data['description'];
+            $tour->type_id = $data['type'];
+            DB::update('update tour set tour_name = ?, tour_description = ?, type_id = ?'
+            ,[$tour->tour_name, $tour->tour_description, $tour->type_id, $id]);
+            return redirect('/tour')->with('status',"Update successfully");
+        }
+        catch(Exception $e){
+            return redirect('/tour')->with('failed',"operation failed");
+        }    
     }
 
     /**
@@ -79,6 +120,7 @@ class TourController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $deleted = Tour::where('tour_id', $id)->delete();
+        return redirect()->back();
     }
 }

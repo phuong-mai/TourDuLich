@@ -31,6 +31,26 @@ Route::get('/tour',[
     'as'=>'tour',
     'uses'=>'TourController@index'
 ]);
+
+Route::get('tour/edit/{tour_id}',[
+    'as'=>'edit',
+    'uses'=>'TourController@edit'
+]);
+
+Route::post('tour/edit/{tour_id}','TourController@update');
+
+Route::get('tour/create',[
+    'as'=>'create',
+    'uses'=>'TourController@create'
+]);
+
+Route::post('tour/create','TourController@store');
+
+Route::get('destroy/{tour_id}',[
+    'as'=>'destroy',
+    'uses'=>'TourController@destroy'
+]);
+
 //group
 Route::get('/group',[
     'as'=>'group',
