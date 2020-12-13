@@ -14,7 +14,10 @@
               <div class="nav-link dropdown-toggle">
                 <span class="mr-1 d-none d-lg-inline text-gray-600 small">Admin Name</span>
                 <div class="topbar-divider d-none d-sm-block"></div>
-                <a href="#" class="ml-1 d-none d-lg-inline text-gray-600 small">Đăng xuất</a>
+                @if(Auth::check())
+                <a href="{{ route('logout') }}" class="ml-1 d-none d-lg-inline text-gray-600 small">Đăng xuất</a>
+             
+            @endif
               </div>
             </li>
           </ul>

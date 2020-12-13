@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use App\Staff;
 use Illuminate\Http\Request;
 use Validator;
+use DateTime;
+use Illuminate\Database\Eloquent\Builder;
 
 class StaffController extends Controller
 {
@@ -35,7 +37,7 @@ class StaffController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
-     */
+     */ 
     public function store(Request $request)
     {
         $new = new Staff();
