@@ -51,10 +51,10 @@ class PriceController extends Controller
                 $price->price_start_date = $data['start_day'];
                 $price->price_end_date = $data['end_day'];
                 $price->save();
-				return redirect('price')->with('status',"Insert successfully");
+				return redirect('price')->with('status',"Thêm thành công.");
 			}
 			catch(Exception $e){
-				return redirect('price')->with('failed',"operation failed");
+				return redirect('price')->with('failed',"Thêm không thành công.");
 			}
     }
     public function PriceEdit(Request $request,$id) {
@@ -67,10 +67,10 @@ class PriceController extends Controller
                 $price->price_end_date = $data['end_day'];
                 DB::update('update price set price_value = ?,tour_id=?,price_start_date=?,price_end_date=? where price_id = ?'
                 ,[$price->price_value,$price->tour_id,$price->price_start_date,$price->price_end_date,$id]);
-                return redirect('price')->with('status',"Update successfully");
+                return redirect('price')->with('status',"Sửa thành công.");
 			}
 			catch(Exception $e){
-				return redirect('price')->with('failed',"operation failed");
+				return redirect('price')->with('failed',"Sửa không thành công.");
             }
         }
 

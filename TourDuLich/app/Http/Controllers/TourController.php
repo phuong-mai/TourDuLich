@@ -63,11 +63,11 @@ class TourController extends Controller
             $tour->tour_description = $data['description'];
             $tour->type_id = $data['type'];
             $tour->save();
-            return redirect('/tour')->with('status',"Thêm thành công!");
+            return redirect('/tour')->with('status',"Thêm thành công.");
         }
         catch(\Exception $e)
         {
-            return redirect('/tour')->with('failed',"Thêm không thành công!");
+            return redirect('/tour')->with('failed',"Thêm không thành công.");
         }
     }
     }
@@ -93,7 +93,7 @@ class TourController extends Controller
     {
         $tours = DB::table('tour')->where('tour.tour_id',$id)->get();
         $types = DB::table('type')->get();
-        return view('pages.Tour.tour_update', ['tours' => $ , 'types' => $types]);
+        return view('pages.Tour.tour_update', ['tours' => $tour , 'types' => $types]);
         // $tour = Tour::where('tour_id', '=', $id)->first();
         // return view('pages.Tour.tour_update',compact('tour'));
     }
@@ -115,10 +115,10 @@ class TourController extends Controller
             $tour->type_id = $data['type'];
             DB::update('update tour set tour_name = ?, tour_description = ?, type_id = ?'
             ,[$tour->tour_name, $tour->tour_description, $tour->type_id, $id]);
-            return redirect('/tour')->with('status',"Update successfully");
+            return redirect('/tour')->with('status',"Sửa thành công.");
         }
         catch(Exception $e){
-            return redirect('/tour')->with('failed',"operation failed");
+            return redirect('/tour')->with('failed',"Sửa không thành công.");
         }    
     }
 

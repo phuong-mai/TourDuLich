@@ -49,11 +49,11 @@ class CustomerController extends Controller
         $new->fill($request->all());
         try{
             $new->save();
-            return redirect('/customer')->with('success','Thêm thành công');
+            return redirect('/customer')->with('success','Thêm thành công.');
         }
         catch(\Exception $e)
         {
-            return redirect('/customer')->with('fail','Thêm thất bại');
+            return redirect('/customer')->with('fail','Thêm không thành công.');
         }
     }
 
@@ -99,11 +99,11 @@ class CustomerController extends Controller
         $new->fill($request->all());
         try{
             $new->save();
-            return redirect('/customer')->with('success','thành công');
+            return redirect('/customer')->with('success','Sửa thành công.');
         }
         catch(\Exception $e)
         {
-            return redirect('/customer')->with('fail','không thành công');
+            return redirect('/customer')->with('fail','Sửa không thành công.');
         }
     }
    

@@ -1,6 +1,6 @@
 @extends('layout.master')
 @section('content')
-<div class="container-fluid col-md-8">
+<div class="container-fluid col-md-12">
     <div class="card shadow mb-4">
         <div class="card-header">
             <h5 class="card-title" id="exampleModalLabel">Sửa Tour</h5>
