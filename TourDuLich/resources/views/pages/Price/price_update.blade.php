@@ -25,7 +25,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="start_day">Từ ngày</label>
-                        <input type="date" class="form-control" name="start_day" id="start_day" value="{{ $price->price_start_date}}">
+                        <input type="date" class="form-control" name="start_day" id="start_day" value="{{date_format(new DateTime($price->price_start_date), 'Y-m-d') }}">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="end_day">Đến ngày</label>
