@@ -112,6 +112,9 @@ Route::post('/register',[
 Route::get('/price',[
     'uses'=>'PriceController@index'
 ]);
+Route::get('/pricee',[
+    'uses'=>'PriceController@Search'
+]);
 
 Route::get('price/create','PriceController@oncreate');
 
