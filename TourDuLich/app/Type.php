@@ -6,6 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Type extends Model
 {
-    protected $table = "tour_type";
-    protected $fillable = ['id', 'name','description'];
+    protected $table = "type";
+    protected $fillable = ['type_id', 'type_name','type_description'];
 }

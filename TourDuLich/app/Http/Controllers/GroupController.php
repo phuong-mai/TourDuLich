@@ -3,13 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Group;
+use App\Participant;
+use App\Staff;
+use App\Tour;
 use Exception;
-use GuzzleHttp\Psr7\Message;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use SebastianBergmann\Environment\Console;
 
-use function Psy\debug;
 
 class GroupController extends Controller
 {
@@ -20,8 +19,8 @@ class GroupController extends Controller
      */
     public function index()
     {
-        $groups = DB::table('group')->get();
-        return view('pages.group.group',['groups' => $groups]);
+        $groups = Group::orderBy('group_id', 'asc')->get();
+        return view('pages.group.group', ['groups' => $groups]);
     }
 
     /**
@@ -31,8 +30,8 @@ class GroupController extends Controller
      */
     public function create()
     {
-        $tours = DB::table('tour') ->get();
-        return view('pages.group.group_create',['tours' => $tours]);
+        $tours = Tour::get();
+        return view('pages.group.group_create', ['tours' => $tours]);
     }
 
     /**
@@ -43,19 +42,14 @@ class GroupController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->input();
+
         try {
             $group = new Group();
-            $group->tour_id = $data['tour_id'];
-			$group->group_name = $data['group_name'];
-            $group->group_start_date = $data['group_start_date'];
-            $group->group_end_date = $data['group_end_date'];
-            $group->group_plan = $data['group_plan'];
+            $group->fill($request->all());
             $group->save();
-			return redirect('group')->with('status',"Insert successfully");
-        }
-        catch (Exception $ex) {
-			return redirect('group')->with('failed',"operation failed");
+            return redirect('group')->with('status', 'Create group successfully');
+        } catch (Exception $ex) {
+            return redirect('group')->with('failed', 'Create group failed');
         }
         //
     }
@@ -69,8 +63,12 @@ class GroupController extends Controller
     public function show($id)
     {
         //
+        $group = Group::join('tour', 'group.tour_id', '=', 'tour.tour_id')
+            ->where('group.group_id', $id)
+            ->get()
+            ->first();
+        return view('pages.group.group_detail', ['group' => $group]);
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -80,10 +78,11 @@ class GroupController extends Controller
     public function edit($id)
     {
         //
-        $groups = DB::table('group')
-                    ->join('tour', 'group.tour_id', '=', 'tour.tour_id')->where('group_id',$id)->get();
-        $tours = DB::table('tour')->get();
-        return view('pages.group.group_update',['groups'=>$groups,'tours'=>$tours]);
+        $groups = Group::join('tour', 'group.tour_id', '=', 'tour.tour_id')
+            ->where('group_id', $id)
+            ->get();
+        $tours = Tour::all();
+        return view('pages.group.group_update', ['groups' => $groups, 'tours' => $tours]);
     }
 
     /**
@@ -93,28 +92,16 @@ class GroupController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,$id)
     {
         //
-        $data = $request -> input();
-        try{
-            $group = new Group();
-            $group->tour_id = $data['tour_id'];
-            $group->group_name = $data['group_name'];
-            $group->group_start_date = $data['group_start_date'];
-            $group->group_end_date = $data['group_end_date'];
-            $group->group_plan = $data['group_plan'];
-            DB::table('group')  ->where('group_id',$id)
-                                ->update([  'tour_id' => $group->tour_id, 
-                                            'group_name' => $group->group_name,
-                                            'group_start_date' => $group->group_start_date,
-                                            'group_end_date' => $group->group_end_date,
-                                            'group_plan' => $group->group_plan
-                                            ]);
-            return redirect('group')->with('status',"Update successfully");
-        }
-        catch(Exception $e){
-            return redirect('group')->with('failed',"Operation failed");
+        $data = $request->all();
+        $group = Group::findOrFail($id);
+        try {
+            $group->update($data);
+            return redirect('group')->with('status', "Update group successfully");
+        } catch (Exception $e) {
+            return redirect('group')->with('failed', "Update group failed");
         }
     }
 
@@ -127,7 +114,33 @@ class GroupController extends Controller
     public function destroy($id)
     {
         //
-        $groups = DB::table('group') -> delete('group_id',$id);
-        return view('pages.group.group',['groups'=>$groups]);
+        Group::where('group_id', $id)->delete();
+        Participant::where('group_id', $id)->delete();
+        return redirect()->back();
+    }
+
+    public function chooseStaff($id)
+    {
+        $staffs = Staff::get();        
+        // $group = new Group();
+        // $group->tour_id = 
+        // $group->group_name = $request->input('group_name');
+        // $group->group_start_date = $request->input('group_start_date');
+        // $group->group_end_date = $request->input('group_end_date');
+        // $group->group_plan = $request->input('group_plan');
+        // DB::table('group')->where('group_id', $id)
+        //     ->update([
+        //         'tour_id' => $group->tour_id,
+        //         'group_name' => $group->group_name,
+        //         'group_start_date' => $group->group_start_date,
+        //         'group_end_date' => $group->group_end_date,
+        //         'group_plan' => $group->group_plan
+        //     ]);
+        // $data = $request->input();
+        // $group = new Group();
+        // $group->tour_id = $data['tour_id'];
+        //     Group::where('group_id', $id)
+        //         ->update(['tour_id' => $group->tour_id]);
+        return view('pages.participant.choose_staff', ['staffs' => $staffs, 'id' => $id]);
     }
 }

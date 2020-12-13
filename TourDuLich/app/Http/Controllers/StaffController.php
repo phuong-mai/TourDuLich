@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Staff;
 use Illuminate\Http\Request;
+use Validator;
 
 class StaffController extends Controller
 {
@@ -11,9 +12,12 @@ class StaffController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
+
     public function index()
     {
-        return view('pages.staff');
+        $staffs = Staff::paginate(10);
+        return view('pages.Staff.staff',compact('staffs'));
     }
 
     /**
@@ -23,7 +27,7 @@ class StaffController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.Staff.staff_create');
     }
 
     /**
@@ -34,7 +38,21 @@ class StaffController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $new = new Staff();
+        $validator=Validator::make(($request->all()),$new->rules,$new->message);
+            if ($validator->fails()){
+                return redirect()->back()->withInput()->withErrors($validator);
+            }
+        $request['staff_birthday'] =date('Y-m-d H:i:s', strtotime($request->staff_birthday));
+        $new->fill($request->all());
+        try{
+            $new->save();
+            return redirect('/staff')->with('success','Thêm thành công');
+        }
+        catch(\Exception $e)
+        {
+            return $e;
+        }
     }
 
     /**
@@ -45,7 +63,8 @@ class StaffController extends Controller
      */
     public function show($id)
     {
-        //
+        $staff=Staff::where('staff_id', '=', $id)->first();
+        return view('pages.Staff.staff_detail',compact('staff'));
     }
 
     /**
@@ -56,9 +75,10 @@ class StaffController extends Controller
      */
     public function edit($id)
     {
-        //
+        $staff=Staff::where('staff_id', '=', $id)->first();
+        return view('pages.Staff.staff_update',compact('staff'));
     }
-
+    
     /**
      * Update the specified resource in storage.
      *
@@ -66,11 +86,25 @@ class StaffController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $new = Staff::where('staff_id','=', $request->staff_id)->first();
+        $validator=Validator::make(($request->all()),$new->rules,$new->message);
+            if ($validator->fails()){
+                return redirect()->back()->withInput()->withErrors($validator);
+            }
+        $request['staff_birthday'] =date('Y-m-d H:i:s', strtotime($request->staff_birthday));
+        $new->fill($request->all());
+        try{
+            $new->save();
+            return redirect('/staff')->with('success','thành công');
+        }
+        catch(\Exception $e)
+        {
+            return redirect('/staff')->with('fail','không thành công');
+        }
     }
-
+   
     /**
      * Remove the specified resource from storage.
      *
@@ -79,6 +113,7 @@ class StaffController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $deleted = Staff::where('staff_id',$id)->delete();
+        return redirect()->back();
     }
 }

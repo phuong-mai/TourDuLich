@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Customer;
+use DateTime;
+use Illuminate\Database\Eloquent\Builder;
+use Validator;
 
 class CustomerController extends Controller
 {
@@ -11,9 +15,11 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
     public function index()
     {
-        return view('pages.customer');
+        $customers = Customer::paginate(10);
+        return view('pages.Customer.customer',compact('customers'));
     }
 
     /**
@@ -23,7 +29,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.Customer.customer_create');
     }
 
     /**
@@ -34,7 +40,21 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $new = new Customer();
+        $validator=Validator::make(($request->all()),$new->rules,$new->message);
+            if ($validator->fails()){
+                return redirect()->back()->withInput()->withErrors($validator);
+            }
+        $request['customer_birthday'] =date('Y-m-d H:i:s', strtotime($request->customer_birthday));
+        $new->fill($request->all());
+        try{
+            $new->save();
+            return redirect('/customer')->with('success','Thêm thành công');
+        }
+        catch(\Exception $e)
+        {
+            return redirect('/customer')->with('fail','Thêm thất bại');
+        }
     }
 
     /**
@@ -45,7 +65,8 @@ class CustomerController extends Controller
      */
     public function show($id)
     {
-        //
+        $customer=Customer::where('customer_id','=', $id)->first();
+        return view('pages.Customer.customer_detail', compact('customer'));
     }
 
     /**
@@ -56,9 +77,10 @@ class CustomerController extends Controller
      */
     public function edit($id)
     {
-        //
+        $customer=Customer::where('customer_id', '=', $id)->first();
+        return view('pages.Customer.customer_update',compact('customer'));
     }
-
+    
     /**
      * Update the specified resource in storage.
      *
@@ -66,11 +88,25 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $new = Customer::where('customer_id','=', $request->customer_id)->first();
+        $validator=Validator::make(($request->all()),$new->rules,$new->message);
+            if ($validator->fails()){
+                return redirect()->back()->withInput()->withErrors($validator);
+            }
+        $request['customer_birthday'] =date('Y-m-d H:i:s', strtotime($request->customer_birthday));
+        $new->fill($request->all());
+        try{
+            $new->save();
+            return redirect('/customer')->with('success','thành công');
+        }
+        catch(\Exception $e)
+        {
+            return redirect('/customer')->with('fail','không thành công');
+        }
     }
-
+   
     /**
      * Remove the specified resource from storage.
      *
@@ -79,6 +115,7 @@ class CustomerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $deleted = Customer::where('customer_id',$id)->delete();
+        return redirect()->back();
     }
 }
