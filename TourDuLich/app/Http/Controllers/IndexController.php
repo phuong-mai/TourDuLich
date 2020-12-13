@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use DB;
+use App\Tour;
+use App\Group;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller
@@ -13,7 +15,12 @@ class IndexController extends Controller
      */
     public function index()
     {
-        return view('pages.index');
+        $statistical = Tour::join('group as g', 'tour.tour_id', '=', 'g.tour_id')
+        ->join('cost as c', 'c.group_id', '=', 'g.group_id')
+        ->join('price as p', 'p.tour_id', '=', 'tour.tour_id')
+        ->select('tour.tour_name')
+        ->paginate(10);
+        return view('pages.index', ['statistical' => $statistical]);
     }
 
     /**

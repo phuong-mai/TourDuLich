@@ -48,6 +48,7 @@ class CostController extends Controller
         catch(\Exception $e)
         {
             return redirect('/cost')->with('fail','Thêm thất bại');
+          //  return $e;
         }
     }
 
