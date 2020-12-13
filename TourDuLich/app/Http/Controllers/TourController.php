@@ -91,9 +91,9 @@ class TourController extends Controller
      */
     public function edit($id)
     {
-        $tours = DB::table('tour')->get();
+        $tours = DB::table('tour')->where('tour.tour_id',$id)->get();
         $types = DB::table('type')->get();
-        return view('pages.Tour.tour_update', ['tours' => $tours, 'types' => $types]);
+        return view('pages.Tour.tour_update', ['tours' => $ , 'types' => $types]);
         // $tour = Tour::where('tour_id', '=', $id)->first();
         // return view('pages.Tour.tour_update',compact('tour'));
     }

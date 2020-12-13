@@ -11,11 +11,11 @@
                 @csrf
                 <div class="form-group">
                     <label for="inputTour">Tour</label>
-                    <input type="text" class="form-control" id="tour" name="tour">
+                    <input type="text" class="form-control" id="tour" name="tour" value="{{ $tour -> tour_name }}>
                 </div>
                 <div class="form-group">
                     <label for="inputDescription">Mô tả</label>
-                    <input type="text" class="form-control" id="description" name="description">
+                    <input type="text" class="form-control" id="description" name="description" value="{{ $tour -> tour_description }}>
                 </div>
                 <div class="form-group">
                     <label for="inputTour">Loại tour</label>
