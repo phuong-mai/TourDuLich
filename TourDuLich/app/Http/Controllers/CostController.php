@@ -43,11 +43,11 @@ class CostController extends Controller
         $new->fill($request->all());
         try{
             $new->save();
-            return redirect('/cost')->with('success','Thêm thành công');
+            return redirect('/cost')->with('success','Thêm thành công.');
         }
         catch(\Exception $e)
         {
-            return redirect('/cost')->with('fail','Thêm thất bại');
+            return redirect('/cost')->with('fail','Thêm không thành công.');
           //  return $e;
         }
     }
@@ -96,11 +96,11 @@ class CostController extends Controller
         $data->fill($request->all());
         try{
             $data->save();
-            return redirect('/cost')->with('success','Thêm thành công');
+            return redirect('/cost')->with('success','Sửa thành công.');
         }
         catch(\Exception $e)
         {
-            return redirect('/cost')->with('fail','Thêm thất bại');
+            return redirect('/cost')->with('fail','Sửa không thành công.');
         }
     }
 

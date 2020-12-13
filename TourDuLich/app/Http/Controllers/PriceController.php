@@ -11,8 +11,17 @@ use Illuminate\Validation\Rule;
 
 class PriceController extends Controller
 {
-    public function index() {
-        $prices = DB::table('price')->join('tour', 'price.tour_id', '=', 'tour.tour_id')->paginate(10);
+    public function index(Request $request) {
+        if($request->tour_id)
+        {
+            $tour_id = $request->tour_id;
+        }
+        else
+        {
+            $tour_id = 1;
+        }
+        $prices = DB::table('price')->join('tour', 'price.tour_id', '=', 'tour.tour_id')->where('price.tour_id',$tour_id)->paginate(10);
+        $tours = DB::table('tour')->get();
         foreach($prices as $price)
         {
             if($price->price_start_date)
@@ -21,7 +30,20 @@ class PriceController extends Controller
             $price->price_end_date = date_format(new DateTime($price->price_end_date), 'd-m-Y ') ;
         }
         //dd(typeof($prices[16]->price_start_date));
-        return view('pages.price.price', ['prices' => $prices]);
+        return view('pages.price.price', ['prices' => $prices,'tours'=>$tours]);
+    }
+    public function Search(Request $request) {
+        $tour_id = $request->tour_id;
+        $prices = DB::table('price')->join('tour', 'price.tour_id', '=', 'tour.tour_id')->where('price.tour_id',$tour_id)->paginate(10);
+        foreach($prices as $price)
+        {
+            if($price->price_start_date)
+            $price->price_start_date = date_format(new DateTime($price->price_start_date), 'd-m-Y ') ;
+            if($price->price_end_date)
+            $price->price_end_date = date_format(new DateTime($price->price_end_date), 'd-m-Y ') ;
+        }
+        //dd(typeof($prices[16]->price_start_date));
+        return $prices;
     }
 
     public function oncreate() {
@@ -51,10 +73,10 @@ class PriceController extends Controller
                 $price->price_start_date = $data['start_day'];
                 $price->price_end_date = $data['end_day'];
                 $price->save();
-				return redirect('price')->with('status',"Insert successfully");
+				return redirect('price')->with('status',"Thêm thành công.");
 			}
 			catch(Exception $e){
-				return redirect('price')->with('failed',"operation failed");
+				return redirect('price')->with('failed',"Thêm không thành công.");
 			}
     }
     public function PriceEdit(Request $request,$id) {
@@ -67,10 +89,10 @@ class PriceController extends Controller
                 $price->price_end_date = $data['end_day'];
                 DB::update('update price set price_value = ?,tour_id=?,price_start_date=?,price_end_date=? where price_id = ?'
                 ,[$price->price_value,$price->tour_id,$price->price_start_date,$price->price_end_date,$id]);
-                return redirect('price')->with('status',"Update successfully");
+                return redirect('price')->with('status',"Sửa thành công.");
 			}
 			catch(Exception $e){
-				return redirect('price')->with('failed',"operation failed");
+				return redirect('price')->with('failed',"Sửa không thành công.");
             }
         }
 

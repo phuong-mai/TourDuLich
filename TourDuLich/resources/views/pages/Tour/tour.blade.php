@@ -33,7 +33,7 @@
                 <th>Tour</th>
                 <th>Mô tả</th>
                 <th>Loại tour</th>
-                <th>Giá tour</th>
+               
                 <th>Thao tác</th>
             </tr>
             </thead>
@@ -43,7 +43,7 @@
                     <td>{{$tour->tour_name}}</td>
                     <td>{{$tour->tour_description}}</td>
                     <td>{{$tour->type_name}}</td>
-                    <td>{{number_format($tour->price_value,0,',','.')}}</td>
+                   
                     <td>
                         <a type="button" class="btn btn-success btn-sm" href="{{ route('edit', $tour->tour_id) }}">Sửa</a>
                         <a class="btn btn-danger btn-sm" href="{{ route('destroy', $tour->tour_id) }}" onclick="return confirm('Bạn chắc chắn muốn xóa?')" >Xóa</a>
