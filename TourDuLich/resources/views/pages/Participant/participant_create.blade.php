@@ -19,9 +19,9 @@
                             value="{{ $participants->group_name }}">
                     </div>
                     <div class="form-group">
-                        <label for="participant_customer">Danh sách khách</label>
-                        <a type="button" class="btn btn-primary btn-sm" href="#">Chọn khách</a>
-                        <input type="text" class="form-control" id="participant_customer">
+                        <label for="participant_customer">Số lượng khách</label>
+                        <input type="text" class="form-control" id="customer_number" name="customer_number"
+                        value="{{ $participant->customer_number }}">>
                     </div>
                     <div class="form-group">
                         <label for="participant_staff">Danh sách nhân viên</label>

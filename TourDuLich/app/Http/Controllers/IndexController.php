@@ -15,18 +15,24 @@ class IndexController extends Controller
      */
     public function index()
     {
-        $statistical = Tour::join('group as g', 'tour.tour_id', '=', 'g.tour_id')
+        $date =date('2020-04-08');
+        // $statistical = Tour::join('group as g', 'tour.tour_id', '=', 'g.tour_id')
+          $statistical = DB::table('tour')->join('group as g', 'g.tour_id', '=', 'tour.tour_id')
         ->join('cost as c', 'c.group_id', '=', 'g.group_id')
-        ->join('price as p', 'p.tour_id', '=', 'tour.tour_id')
+        ->join('price as p', 'p.tour_id', '=', 'g.tour_id')
+        ->where('g.group_start_date','>=','p.price_start_date')
+        ->where('g.group_start_date','>=','p.price_end_date')
         ->select(
             'g.tour_id AS tour_id',
             'g.group_name AS name',
-            'tour.tour_name AS tour_name',  
-            DB::raw("count(g.tour_id) AS total_groups"),
-            
+            'tour.tour_name AS tour_name',
+
+            DB::raw("count(g.tour_id) AS total_groups")
             )
-    ->groupBy('g.tour_id','g.group_name','tour.tour_name')
+        // ->get();
+        ->groupBy('g.tour_id','g.group_name','tour.tour_name')
         ->paginate(10);
+        // dd($statistical);
         return view('pages.index', ['statistical' => $statistical]);
     }
 

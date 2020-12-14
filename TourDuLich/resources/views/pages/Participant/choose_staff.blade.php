@@ -33,7 +33,7 @@
                                         <div class="form-check">
                                             <label class="form-check-label">
                                                 <input class="form-check-input" value="{{ $staff->staff_id }}"
-                                                    type="checkbox" name="participant_staff[]">
+                                                    type="checkbox" name="participant_staff[]" >
                                             </label>
                                     </td>
                                 </tr>

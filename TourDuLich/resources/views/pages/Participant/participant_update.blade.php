@@ -16,13 +16,13 @@
                         @csrf
                         <div class="form-group">
                             <label for="group_name">Tên đoàn khách</label>
-                            <input type="text" class="form-control" id="group_name" name="group_name"
+                            <input type="text" class="form-control" id="group_name" name="group_name" disabled
                                 value="{{ $participant->group_name }}">
                         </div>
                         <div class="form-group">
-                            <label for="participant_customer">Danh sách khách</label>
-                            <a type="button" class="btn btn-primary btn-sm" href="#">Chọn khách</a>
-                            <input type="text" class="form-control" id="participant_customer">
+                            <label for="customer_number">Số lượng khách</label>
+                            <input type="text" class="form-control" id="customer_number" name="customer_number"
+                            value="{{ $participant->customer_number }}">
                         </div>
                         <div class="form-group">
                             <label for="participant_staff">Danh sách nhân viên</label>
