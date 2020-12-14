@@ -122,25 +122,6 @@ class GroupController extends Controller
     public function chooseStaff($id)
     {
         $staffs = Staff::get();        
-        // $group = new Group();
-        // $group->tour_id = 
-        // $group->group_name = $request->input('group_name');
-        // $group->group_start_date = $request->input('group_start_date');
-        // $group->group_end_date = $request->input('group_end_date');
-        // $group->group_plan = $request->input('group_plan');
-        // DB::table('group')->where('group_id', $id)
-        //     ->update([
-        //         'tour_id' => $group->tour_id,
-        //         'group_name' => $group->group_name,
-        //         'group_start_date' => $group->group_start_date,
-        //         'group_end_date' => $group->group_end_date,
-        //         'group_plan' => $group->group_plan
-        //     ]);
-        // $data = $request->input();
-        // $group = new Group();
-        // $group->tour_id = $data['tour_id'];
-        //     Group::where('group_id', $id)
-        //         ->update(['tour_id' => $group->tour_id]);
         return view('pages.participant.choose_staff', ['staffs' => $staffs, 'id' => $id]);
     }
 }

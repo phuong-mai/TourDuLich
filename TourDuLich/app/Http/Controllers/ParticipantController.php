@@ -55,14 +55,14 @@ class ParticipantController extends Controller
         }
     }
 
-    public function update_list($id, $staff)
+    public function update_list($id, $staff, Request $request)
     {
         if ($staff == null) {
             Participant::where('group_id', $id)->delete();
             return redirect('group');
         } else {
             Participant::where('group_id', $id)
-                ->update(['participant_staff' => $staff]);
+                ->update(['participant_staff' => $staff],['customer_number'=> $request['customer_number']]);
             return redirect('group');
         }
     }
