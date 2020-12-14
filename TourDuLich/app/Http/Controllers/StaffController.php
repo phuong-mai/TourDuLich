@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use App\Staff;
 use Illuminate\Http\Request;
 use Validator;
+use DateTime;
+use Illuminate\Database\Eloquent\Builder;
 
 class StaffController extends Controller
 {
@@ -35,7 +37,7 @@ class StaffController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
-     */
+     */ 
     public function store(Request $request)
     {
         $new = new Staff();
@@ -47,11 +49,11 @@ class StaffController extends Controller
         $new->fill($request->all());
         try{
             $new->save();
-            return redirect('/staff')->with('success','Thêm thành công');
+            return redirect('/staff')->with('success','Thêm thành công.');
         }
         catch(\Exception $e)
         {
-            return $e;
+            return redirect('staff')->with('failed',"Thêm không thành công.");
         }
     }
 
@@ -97,11 +99,11 @@ class StaffController extends Controller
         $new->fill($request->all());
         try{
             $new->save();
-            return redirect('/staff')->with('success','thành công');
+            return redirect('/staff')->with('success','Sửa thành công.');
         }
         catch(\Exception $e)
         {
-            return redirect('/staff')->with('fail','không thành công');
+            return redirect('/staff')->with('fail','Sửa không thành công.');
         }
     }
    

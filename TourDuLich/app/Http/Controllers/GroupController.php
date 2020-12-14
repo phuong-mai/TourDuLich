@@ -47,9 +47,9 @@ class GroupController extends Controller
             $group = new Group();
             $group->fill($request->all());
             $group->save();
-            return redirect('group')->with('status', 'Create group successfully');
+            return redirect('group')->with('status', 'Thêm thành công.');
         } catch (Exception $ex) {
-            return redirect('group')->with('failed', 'Create group failed');
+            return redirect('group')->with('failed', 'Thêm không thành công.');
         }
         //
     }
@@ -99,9 +99,9 @@ class GroupController extends Controller
         $group = Group::findOrFail($id);
         try {
             $group->update($data);
-            return redirect('group')->with('status', "Update group successfully");
+            return redirect('group')->with('status', "Sửa thành công.");
         } catch (Exception $e) {
-            return redirect('group')->with('failed', "Update group failed");
+            return redirect('group')->with('failed', "Sửa không thành công");
         }
     }
 

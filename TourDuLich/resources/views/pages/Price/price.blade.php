@@ -1,5 +1,24 @@
 @extends('layout.master')
 @section('content')
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script>
+    $(document).ready(function () {
+        $('#tour_id').change(function () {
+        $.ajax({
+            type: 'GET',
+            dataType: "html",
+            url : '/price',
+            data : {
+                tour_id : document.getElementById('tour_id').value
+            },
+            success:function(data){
+                $('body').html(data);
+            }
+        });
+    });
+});
+
+</script>
 
 <div class="container-fluid">
     @if (session('status'))
@@ -19,9 +38,15 @@
             <div class="row justify-content-between">
                 <div class="col-auto">
                     <h5 class="font-weight-bold text-primary">Giá Tour</h5>
+                    <select id="tour_id" name="tour_id" class="form-control" aria-placeholder="Select">
+                        <option value="" disabled selected hidden>{{$prices[0]->tour_name}}</option>
+                        @foreach($tours as $tour)
+                        <option value="{{$tour->tour_id}}"  >{{$tour->tour_name}}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="col-auto">
-                  <a type="button" class="btn btn-primary btn-sm" href="{{ url('price/create') }}">Add</a>
+                  <a type="button" class="btn btn-primary btn-sm" href="{{ url('price/create') }}">Thêm</a>
 
                     {{-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                         aria-hidden="true">
@@ -75,10 +100,11 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
+
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>STT</th>
+                            <th>ID</th>
                             <th>Loại tour</th>
                             <th>Giá tour</th>
                             <th>Từ ngày</th>
@@ -89,7 +115,7 @@
                     <tbody>
                         @foreach($prices as $price)
                         <tr>
-                            <td>{{ $price-> tour_id }}</td>
+                            <td>{{ $price-> price_id }}</td>
                             <td>{{ $price-> tour_name }}</td>
                             <td>{{ number_format( $price-> price_value , 0) }}</td>
                             <td>{{ $price->price_start_date}}</td>
@@ -120,6 +146,7 @@
                                                     data-dismiss="modal">Hủy</button>
                                                 <button type="button" class="btn btn-danger btn-sm">Xác nhận
                                                     xóa</button>
+                                                    <a class="btn btn-danger btn-sm" href=""></a>
                                             </div>
                                         </div>
                                     </div>

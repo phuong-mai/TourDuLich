@@ -31,12 +31,12 @@
 
             @endif
             <div class="form-wrapper">
-                <input type="email" name="email" placeholder="Email" class="form-control">
+                <input type="email" name="staff_email" placeholder="Email" class="form-control">
                 <i class="zmdi zmdi-email"></i>
             </div>
 
             <div class="form-wrapper">
-                <input type="password" name="password" placeholder="Password" class="form-control">
+                <input type="password" name="pass" placeholder="Password" class="form-control">
                 <i class="zmdi zmdi-lock"></i>
             </div>
 

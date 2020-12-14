@@ -46,6 +46,7 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+        
     ],
 
     /*
@@ -71,10 +72,7 @@ return [
             'model' => App\User::class,
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        
     ],
 
     /*
@@ -99,6 +97,7 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+       
     ],
 
     /*
