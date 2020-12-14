@@ -41,9 +41,13 @@ class ParticipantController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store($id)
+    public function store(Request $request,$id)
     {
         //
+        $data = $request->input();
+        $name = $data['group_name'];
+        Participant::where('group_id', $id)
+                        ->update(['customer_number' => $name]);
         $staffs = Participant::where('group_id', $id)
             ->get()
             ->first();
@@ -91,6 +95,7 @@ class ParticipantController extends Controller
                 ->join('group', 'group.group_id', '=', 'participant.group_id')
                 ->get();
             $staffs = Participant::where('participant.group_id', $id)
+                ->where('participant.group_id', $id)
                 ->join('group', 'group.group_id', '=', 'participant.group_id')
                 ->select('participant_staff')
                 ->first();
@@ -99,6 +104,7 @@ class ParticipantController extends Controller
             $staffs = [];
             foreach ($array as $item) {
                 $data = Staff::where('staff_id', $item)
+
                     ->get()
                     ->first();
                 $staffs[] = $data;
