@@ -18,7 +18,7 @@
             <div class="card-header py-3">
                 <div class="row justify-content-between">
                     <div class="col-auto">
-                        <h5 class="font-weight-bold text-primary">Đoàn Khách</h5>
+                        <h5 class="font-weight-bold text-primary">Đặt tour</h5>
                     </div>
                     <form action="group/create" method="GET">
                         @csrf
