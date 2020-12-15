@@ -40,12 +40,7 @@ class StaffController extends Controller
      */ 
     public function store(Request $request)
     {
-        $new = new Staff();
-        $validator=Validator::make(($request->all()),$new->rules,$new->message);
-            if ($validator->fails()){
-                return redirect()->back()->withInput()->withErrors($validator);
-            }
-        $request['staff_birthday'] =date('Y-m-d H:i:s', strtotime($request->staff_birthday));
+        $new = new Staff;
         $new->fill($request->all());
         try{
             $new->save();
@@ -53,7 +48,8 @@ class StaffController extends Controller
         }
         catch(\Exception $e)
         {
-            return redirect('staff')->with('failed',"Thêm không thành công.");
+            return redirect('/staff')->with('fail','Thêm không thành công.');
+          //  return $e;
         }
     }
 
@@ -91,10 +87,6 @@ class StaffController extends Controller
     public function update(Request $request)
     {
         $new = Staff::where('staff_id','=', $request->staff_id)->first();
-        $validator=Validator::make(($request->all()),$new->rules,$new->message);
-            if ($validator->fails()){
-                return redirect()->back()->withInput()->withErrors($validator);
-            }
         $request['staff_birthday'] =date('Y-m-d H:i:s', strtotime($request->staff_birthday));
         $new->fill($request->all());
         try{

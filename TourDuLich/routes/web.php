@@ -218,24 +218,37 @@ Route::post('/register',[
     'uses'=>'LoginController@postregister'
 ]);
 
+//price
 Route::get('/price',[
+    'as'=>'price',
     'uses'=>'PriceController@index'
-]);
-Route::get('/pricee',[
-    'uses'=>'PriceController@Search'
-]);
+])->middleware('auth');
+Route::get('price/edit_price/{price_id}',[
+    'as'=>'edit_price',
+    'uses'=>'PriceController@edit'
+])->middleware('auth');
+Route::post('price/edit_price/{price_id}','PriceController@update');
 
-Route::get('price/create','PriceController@oncreate');
+Route::get('destroy_price/{price_id}',[
+    'as'=>'destroy_price',
+    'uses'=>'PriceController@destroy'
+])->middleware('auth');
+Route::get('price/create',[
+    'as'=>'create_price',
+    'uses'=>'PriceController@create'
+])->middleware('auth');
+Route::post('price/create','PriceController@store');
 
-Route::post('price/create','PriceController@PriceCreate');
+Route::get('price/detail_price/{price_id}',[
+    'as'=>'show_price',
+    'uses'=>'PriceController@show'
+])->middleware('auth');
 
-Route::get('/price/edit/{id}',[
-    'uses'=>'PriceController@onedit'
-]);
-
-Route::post('/price/edit/{id}',[
-    'uses'=>'PriceController@PriceEdit'
-]);
+Route::get('destroy_price/{id}',[
+    'as'=>'destroy_price',
+    'uses'=>'PriceController@destroy'
+])->middleware('auth');
+//end price
 //Auth::routes();
 Auth::routes();
 

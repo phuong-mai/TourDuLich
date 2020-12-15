@@ -39,7 +39,7 @@ class CostController extends Controller
     public function store(Request $request)
     {
         $new = new Cost;
-        $request['cost_total'] = $request->cost_hotel + $request->cost_food + $request->cost_vehicle + $request->cos_another;
+        $request['cost_total'] = $request->cost_hotel + $request->cost_food + $request->cost_vehicle + $request->cost_another;
         $new->fill($request->all());
         try{
             $new->save();

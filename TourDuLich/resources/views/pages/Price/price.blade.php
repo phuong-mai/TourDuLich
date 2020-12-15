@@ -1,24 +1,5 @@
 @extends('layout.master')
 @section('content')
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
-{{-- <script>
-$(document).ready(function () {
-$('#tour_id').change(function () {
-$.ajax({
-type: 'GET',
-dataType: "html",
-url : '/price',
-data : {
-tour_id : document.getElementById('tour_id').value
-},
-success:function(data){
-$('body').html(data);
-}
-});
-});
-});
-
-</script> --}}
 
 <div class="container-fluid">
 @if (session('status'))
@@ -121,36 +102,11 @@ data-dismiss="modal">Hủy</button>
 <td>{{ $price->price_start_date}}</td>
 <td>{{ $price->price_end_date}}</td>
 <td>
-<a class="btn btn-success btn-sm" href = 'price/edit/{{ $price->price_id }}'>Sửa</a>
-<button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
-data-target="#exampleModal2" data-whatever="@getbootstrap">Xóa</button>
-
-<div class="modal fade" id="exampleModal2" tabindex="-1"
-aria-labelledby="exampleModalLabel2" aria-hidden="true">
-<div class="modal-dialog">
-<div class="modal-content">
-<div class="modal-header">
-<h5 class="modal-title" id="exampleModalLabel">Xóa Giá Tour</h5>
-<button type="button" class="close" data-dismiss="modal"
-aria-label="Close">
-<span aria-hidden="true">&times;</span>
-</button>
-</div>
-<div class="modal-body">
-<p>
-Bạn chắc chắn muốn xóa?
-</p>
-</div>
-<div class="modal-footer">
-<button type="button" class="btn btn-secondary btn-sm"
-data-dismiss="modal">Hủy</button>
-<button type="button" class="btn btn-danger btn-sm">Xác nhận
-xóa</button>
-<a class="btn btn-danger btn-sm" href=""></a>
-</div>
-</div>
-</div>
-</div>
+    <a class="btn btn-success btn-sm"
+        href="{{ route('edit_price', $price->price_id) }}">Sửa</a>
+    <a class="btn btn-danger btn-sm" href="{{ route('destroy_price', $price->price_id) }}"
+        onclick="return confirm('Bạn có chắc muốn xóa')">Xóa</a>
+</td>
 </tr>
 @endforeach
 </tbody>
