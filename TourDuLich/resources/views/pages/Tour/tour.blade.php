@@ -2,15 +2,15 @@
 @section('content')
 
 <div class="container-fluid">
-    @if (session('status'))
+    @if (session('success'))
     <div class="alert alert-success" role="alert">
         <button type="button" class="close" data-dismiss="alert">×</button>
-        {{ session('status') }}
+        {{ session('success') }}
     </div>
-    @elseif(session('failed'))
+    @elseif(session('fail'))
     <div class="alert alert-danger" role="alert">
         <button type="button" class="close" data-dismiss="alert">×</button>
-        {{ session('failed') }}
+        {{ session('fail') }}
     </div>
     @endif
     <!-- DataTales Example -->

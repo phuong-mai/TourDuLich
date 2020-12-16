@@ -41,10 +41,6 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
         $new = new Customer();
-        $validator=Validator::make(($request->all()),$new->rules,$new->message);
-            if ($validator->fails()){
-                return redirect()->back()->withInput()->withErrors($validator);
-            }
         $request['customer_birthday'] =date('Y-m-d H:i:s', strtotime($request->customer_birthday));
         $new->fill($request->all());
         try{
@@ -91,10 +87,6 @@ class CustomerController extends Controller
     public function update(Request $request)
     {
         $new = Customer::where('customer_id','=', $request->customer_id)->first();
-        $validator=Validator::make(($request->all()),$new->rules,$new->message);
-            if ($validator->fails()){
-                return redirect()->back()->withInput()->withErrors($validator);
-            }
         $request['customer_birthday'] =date('Y-m-d H:i:s', strtotime($request->customer_birthday));
         $new->fill($request->all());
         try{

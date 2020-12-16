@@ -2,6 +2,17 @@
 @section('content')
 
 <div class="container-fluid">
+@if (session('success'))
+<div class="alert alert-success" role="alert">
+<button type="button" class="close" data-dismiss="alert">×</button>
+{{ session('success') }}
+</div>
+@elseif(session('fail'))
+<div class="alert alert-danger" role="alert">
+<button type="button" class="close" data-dismiss="alert">×</button>
+{{ session('fail') }}
+</div>
+@endif
   <!-- DataTales Example -->
   <div class="card shadow mb-4">
     <div class="card-header py-3">
@@ -34,7 +45,7 @@
               <td>
                 <a class="btn btn-dark btn-sm" href="{{route('show_staff',$i->staff_id)}}">Xem</a>
                 <a class="btn btn-success btn-sm" href="{{route('edit_staff',$i->staff_id)}}">Sửa</a>
-                <a class="btn btn-danger btn-sm" href="{{route('destroy_staff',$i->staff_id)}}" onclick="return confirm('Bạn có chắc sẽ xóa sản phẩm này')" >Xóa</a>
+                <a class="btn btn-danger btn-sm" href="{{route('destroy_staff',$i->staff_id)}}" onclick="return confirm('Bạn có chắc muốn xóa')" >Xóa</a>
               </td>
             </tr>
           @endforeach

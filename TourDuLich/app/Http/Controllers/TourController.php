@@ -52,7 +52,7 @@ class TourController extends Controller
         $name = DB::table('tour')->where('tour_name', $data['tour'])->get()->first();;
         if($name != null)
         {
-            return redirect('/tour')->with('failed',"Tên tour đã tồn tại!");
+            return redirect('/tour')->with('fail',"Tên tour đã tồn tại!");
         }
         else
         {
@@ -63,11 +63,11 @@ class TourController extends Controller
             $tour->tour_description = $data['description'];
             $tour->type_id = $data['type'];
             $tour->save();
-            return redirect('/tour')->with('status',"Thêm thành công.");
+            return redirect('/tour')->with('success',"Thêm thành công.");
         }
         catch(\Exception $e)
         {
-            return redirect('/tour')->with('failed',"Thêm không thành công.");
+            return redirect('/tour')->with('fail',"Thêm không thành công.");
         }
     }
     }
@@ -115,10 +115,10 @@ class TourController extends Controller
             $tour->type_id = $data['type'];
             DB::update('update tour set tour_name = ?, tour_description = ?, type_id = ?'
             ,[$tour->tour_name, $tour->tour_description, $tour->type_id, $id]);
-            return redirect('/tour')->with('status',"Sửa thành công.");
+            return redirect('/tour')->with('success',"Sửa thành công.");
         }
         catch(Exception $e){
-            return redirect('/tour')->with('failed',"Sửa không thành công.");
+            return redirect('/tour')->with('fail',"Sửa không thành công.");
         }
     }
 
