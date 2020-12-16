@@ -83,8 +83,12 @@ Route::get('/participant/staff/group_{id}',[
 ])->middleware('auth');
 //participant
 Route::post('/participant/group_{id}',[
-    'as'=>'participant_create',
+    'as'=>'store',
     'uses'=>'ParticipantController@store'
+]);
+Route::post('/customer_file',[
+    'as'=>'customer_file',
+    'uses'=>'ParticipantController@customerfile'
 ]);
 Route::get('/participant/group_{id}',[
     'as'=>'participant_edit',

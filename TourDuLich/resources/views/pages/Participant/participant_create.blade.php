@@ -20,8 +20,9 @@
                     </div>
                     <div class="form-group">
                         <label for="participant_customer">Danh sách khách</label>
-                        <a type="button" class="btn btn-primary btn-sm" href="#">Chọn khách</a>
-                        <input type="text" class="form-control" id="participant_customer">
+                        <a type="button" class="btn btn-primary btn-sm" href="#">Thêm danh sách</a>
+                        <input type="file" name="image" class="custom-file-input">
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="participant_staff">Danh sách nhân viên</label>

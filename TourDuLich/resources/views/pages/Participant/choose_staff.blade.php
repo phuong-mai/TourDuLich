@@ -1,5 +1,6 @@
 @extends('layout.master')
 @section('content')
+<div class="container-fluid">
     <form action="participant/staff/group_{{ $id }}" method="POST">
         @csrf
         <div class="card shadow mb-4">
@@ -9,7 +10,6 @@
                         <h5 class="font-weight-bold text-primary">Chọn nhân viên</h5>
                     </div>
                     <div class="col-auto">
-                        <a type="button" class="btn btn-primary btn-sm" href="{{ route('create_cost') }}">Thêm</a>
                         <button type="submit" class="btn btn-primary btn-sm">Lưu</button>
                     </div>
                 </div>
@@ -25,17 +25,20 @@
                             </tr>
                         </thead>
                         <tbody>
+                           
                             @foreach ($staffs as $staff)
+                           
                                 <tr>
                                     <td>{{ $staff->staff_name }}</td>
                                     <td>{{ $staff->staff_responsibility }}</td>
-                                    <td>
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input class="form-check-input" value="{{ $staff->staff_id }}"
-                                                    type="checkbox" name="participant_staff[]">
-                                            </label>
-                                    </td>
+                                    <td> 
+                                    @if(in_array($staff->staff_id, $staffs2))
+                                    <input class="form-check-input m-2" value="{{ $staff->staff_id }}" type="checkbox" name="participant_staff[]" checked >
+                                    @else
+                                    <input class="form-check-input m-2" value="{{ $staff->staff_id }}" type="checkbox" name="participant_staff[]">
+                                    @endif
+                                    
+                                </td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -44,4 +47,5 @@
             </div>
         </div>
     </form>
+</div>
 @endsection

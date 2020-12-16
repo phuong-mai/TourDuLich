@@ -5,6 +5,7 @@ use DB;
 use App\Tour;
 use App\Group;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 
 class IndexController extends Controller
 {
@@ -17,26 +18,34 @@ public function index()
 {
 // $date =date('2020-04-08');
 // $statistical = Tour::join('group as g', 'tour.tour_id', '=', 'g.tour_id')
-$statistical = DB::table('tour')->join('group as g', 'g.tour_id', '=', 'tour.tour_id')
+$statistical = DB::table('tour')
+->join('group as g', 'g.tour_id', '=', 'tour.tour_id')
 ->join('cost as c', 'c.group_id', '=', 'g.group_id')
 ->join('price as p', 'p.tour_id', '=', 'g.tour_id')
-->join('participant as pp', 'pp.group_id', '=', 'g.group_id')
-->where('g.group_start_date','>=','p.price_start_date')
-->where('g.group_start_date','>=','p.price_end_date')
+->join('participant as pp',function($join)
+ {
+   $join->on('pp.group_id', '=', 'g.group_id');
+   $join->on('g.group_start_date','<='  ,'p.price_end_date');
+   $join->on('g.group_start_date','>=','p.price_start_date');
+ })
 ->select(
-'g.tour_id AS tour_id',
-'g.group_name AS name',
+'tour.tour_id AS tour_id',
 'tour.tour_name AS tour_name',
-DB::raw("count(g.tour_id) AS total_groups"),
+DB::raw("count(g.group_id) AS total_groups"),
 DB::raw("sum(p.price_value*pp.customer_number) AS total"),
 DB::raw("sum(c.cost_hotel + c.cost_food + c.cost_vehicle) AS total_cost"),
 DB::raw("sum(p.price_value*pp.customer_number -(c.cost_hotel + c.cost_food + c.cost_vehicle)) AS total_cost2")
 )
 // ->get();
-->groupBy('g.tour_id','g.group_name','tour.tour_name')
+->groupBy('tour.tour_id','tour.tour_name')
 ->paginate(10);
+
+$sumtotal = $statistical->sum('total_cost2') ;
+$counttotal = $statistical->sum('total_groups') ;
+$customer = DB::table('customer')->select(
+    DB::raw("count(customer.customer_id) AS number"))->get()->first();
 // dd($statistical);
-return view('pages.index', ['statistical' => $statistical]);
+return view('pages.index', ['statistical' => $statistical,'sumtotal'=>$sumtotal,'counttotal'=>$counttotal,'customer'=>$customer ]);
 }
 
 /**

@@ -121,9 +121,9 @@ class GroupController extends Controller
 
     public function chooseStaff($id)
     {
-        $staffs = Staff::get();        
+        $staffs = Staff::where('staff_id','!=' ,1)->get();
         // $group = new Group();
-        // $group->tour_id = 
+        // $group->tour_id =
         // $group->group_name = $request->input('group_name');
         // $group->group_start_date = $request->input('group_start_date');
         // $group->group_end_date = $request->input('group_end_date');
@@ -141,6 +141,23 @@ class GroupController extends Controller
         // $group->tour_id = $data['tour_id'];
         //     Group::where('group_id', $id)
         //         ->update(['tour_id' => $group->tour_id]);
-        return view('pages.participant.choose_staff', ['staffs' => $staffs, 'id' => $id]);
+        $participants = Participant::where('participant.group_id', $id)
+                        ->join('group', 'group.group_id', '=', 'participant.group_id')
+                        ->get()
+                        ->first();
+                    $array = explode(',', $participants->participant_staff);
+                    $staffs2 = [];
+                    foreach ($array as $item) {
+                        if($item !=1)
+                        {
+                        $data = Staff::where('staff_id', $item)
+                            ->get()
+                            ->first();
+                        $staffs2[] = $data;
+                                        }
+                        $array2=[2,4];
+                        // dd( $array2);
+                    }
+        return view('pages.participant.choose_staff', ['staffs' => $staffs,'staffs2' => $array2,'id'=>$id]);
     }
 }

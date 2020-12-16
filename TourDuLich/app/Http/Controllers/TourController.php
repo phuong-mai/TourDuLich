@@ -21,7 +21,7 @@ class TourController extends Controller
         $current_date = Carbon::now();
         $tours = DB::table('tour')
             ->join('type', 'tour.type_id', '=', 'type.type_id')
-            
+
             //->where('price.price_start_date', '>=', $current_date, 'and', '<=', 'price.price_end_date')
             ->paginate(10);
         return view('pages.Tour.tour', ['tours' => $tours]);
@@ -36,7 +36,7 @@ class TourController extends Controller
     {
         $tours = DB::table('tour')->get();
         $types = DB::table('type')->get();
-       
+
         return view('pages.Tour.tour_create', ['tours' => $tours, 'types' => $types]);
     }
 
@@ -49,8 +49,8 @@ class TourController extends Controller
     public function store(Request $request)
     {
         $data = $request->input();
-        $name = DB::table('tour')->where('tour_name', $data['tour'])->get();
-        if($name != NULL)
+        $name = DB::table('tour')->where('tour_name', $data['tour'])->get()->first();;
+        if($name != null)
         {
             return redirect('/tour')->with('failed',"Tên tour đã tồn tại!");
         }
@@ -93,7 +93,7 @@ class TourController extends Controller
     {
         $tours = DB::table('tour')->where('tour.tour_id',$id)->get();
         $types = DB::table('type')->get();
-        return view('pages.Tour.tour_update', ['tours' => $tour , 'types' => $types]);
+        return view('pages.Tour.tour_update', ['tours' => $tours , 'types' => $types]);
         // $tour = Tour::where('tour_id', '=', $id)->first();
         // return view('pages.Tour.tour_update',compact('tour'));
     }
@@ -119,7 +119,7 @@ class TourController extends Controller
         }
         catch(Exception $e){
             return redirect('/tour')->with('failed',"Sửa không thành công.");
-        }    
+        }
     }
 
     /**
